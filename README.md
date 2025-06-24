@@ -40,14 +40,14 @@
     h1 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 33px;
+      font-size: 30px;
       text-align: center;
       margin-bottom: 1rem;
     }
     .results-box h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 30px;
+      font-size: 28px;
       text-align: left;
       margin-bottom: 1rem;
     }
@@ -135,11 +135,11 @@
       margin-top: 0.5rem;
       display: none;
       flex-direction: column;
-      gap: 0.3rem;
+      gap: 0.2rem;
     }
     .results-buttons button {
       border-radius: 20px;
-      padding: 0.4rem 0.8rem;
+      padding: 0.3rem 0.6rem;
       font-size: 1rem;
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
