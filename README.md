@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -24,6 +24,10 @@
       display: block;
       width: 100%;
       margin-top: 1rem;
+    }
+    select:invalid {
+      color: #999;
+      font-style: italic;
     }
     .checkboxes label {
       display: block;
@@ -67,7 +71,8 @@
   <input type="number" id="learners" oninput="toggleEngagementOptions()" />
 
   <label for="engagement">Rollout Options:</label>
-  <select id="engagement" onchange="toggleEngagementOptions()">
+  <select id="engagement" onchange="toggleEngagementOptions()" required>
+    <option value="" disabled selected hidden>Please select a rollout option from the dropdown below</option>
     <option value="elearning">Standard eLearning (Free)</option>
     <option value="team">Team Meeting Rollout (Free)</option>
     <option value="internal">Dedicated Sessions - Internal Facilitation (Free)</option>
