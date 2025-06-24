@@ -18,6 +18,7 @@
       align-items: flex-start;
       width: 1280px;
       height: 720px;
+      margin: 0 auto;
     }
     .calculator {
       background-color: #ffffff;
@@ -36,26 +37,18 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      font-size: 1.875rem;
+      font-weight: 800;
     }
     h1 {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 700;
-      font-size: 2.2rem;
-      text-align: center;
-      margin-bottom: 0.25rem;
-    }
-    h1 em {
-      display: block;
       font-family: 'Montserrat', sans-serif;
-      font-style: italic;
-      font-size: 1.25rem;
-      font-weight: 500;
-      margin-bottom: 1.5rem;
-      border-bottom: 2px solid #5b01fa;
-      padding-bottom: 0.5rem;
+      font-weight: 800;
+      font-size: 2.06rem;
+      text-align: center;
+      margin-bottom: 1rem;
     }
     label {
-      font-weight: 400;
+      font-weight: bold;
       font-size: 1.05rem;
       margin-top: 1.5rem;
       display: block;
@@ -113,7 +106,7 @@
       font-size: 2rem;
       margin-bottom: 1rem;
       font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
+      font-weight: 800;
     }
     .results-line-item {
       font-size: 1.25rem;
@@ -146,7 +139,8 @@
       padding: 0.75rem;
       font-size: 1.2rem;
       font-family: 'Montserrat', sans-serif;
-      text-align: right;
+      text-align: left;
+      width: 90%;
     }
     .submit-btn {
       background: white;
@@ -164,15 +158,17 @@
       background: #5b01fa;
       color: white;
     }
+    #sessionInfo em {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="calculator">
-      <h1>
-        Estimated Programme Rollout Cost Calculator
-        <em>The Line</em>
-      </h1>
+      <h1>Estimated Programme Rollout Cost Calculator</h1>
       <label for="learners">Number of Employees to be Trained:</label>
       <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number" />
       <label for="engagement">Rollout Options:</label>
@@ -200,7 +196,7 @@
       <h2>Estimated Rollout Cost</h2>
       <div id="resultsContent"></div>
       <div class="results-buttons" id="resultsButtons">
-        <button class="submit-btn">Submit interest to RTTM</button>
+        <button class="submit-btn"> Submit Interest to RTTM</button>
         <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
       </div>
     </div>
