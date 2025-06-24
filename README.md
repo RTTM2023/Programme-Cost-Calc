@@ -31,32 +31,27 @@
       display: block;
       font-family: 'Montserrat', sans-serif;
       font-style: italic;
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       font-weight: 500;
-      margin-bottom: 1rem;
-    }
-    hr {
-      border: none;
-      border-top: 3px solid #5b01fa;
-      width: 50%;
-      margin: 1rem auto 2rem;
+      margin-bottom: 1.5rem;
     }
     label {
       font-weight: 400;
-      font-size: 1.625rem;
+      font-size: 1.2rem;
       margin-top: 1.5rem;
       display: block;
     }
     input[type="number"], select {
       margin-top: 0.5rem;
       width: 100%;
-      padding: 0.8rem;
-      font-size: 1.4rem;
-      border: 1px solid #F87171;
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      border: 1px dashed #F87171;
       border-radius: 30px;
       font-family: 'Montserrat', sans-serif;
       font-style: italic;
       color: #a6a6a6;
+      background-color: white;
     }
     input[type="number"]::placeholder, select:invalid {
       color: #a6a6a6;
@@ -74,6 +69,7 @@
       gap: 0.5rem;
       margin-top: 0.5rem;
       font-weight: 400;
+      font-size: 1rem;
     }
     .checkboxes input[type="checkbox"] {
       accent-color: #5b01fa;
@@ -93,19 +89,14 @@
     .results {
       margin-top: 2rem;
     }
-    .disclaimer {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #555;
-      border-top: 1px solid #ccc;
-      padding-top: 1rem;
-    }
     #sessionInfo {
       margin-top: 2rem;
     }
     #sessionInfo em {
       display: block;
       margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #333;
     }
     #sessionDetails {
       padding-top: 1rem;
@@ -120,7 +111,6 @@
       Estimated Programme Rollout Cost Calculator
       <em>The Line</em>
     </h1>
-    <hr />
 
     <label for="learners">Number of Employees to be Trained:</label>
     <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number" />
@@ -149,10 +139,6 @@
     <button onclick="calculateTotal()">Calculate</button>
 
     <div class="results" id="results"></div>
-
-    <div class="disclaimer">
-      We use this estimated pricing as a guideline for clients. This is not indicative of the final price charged, given negotiations on budget, as well as using different rollout options within a single rollout project.
-    </div>
   </div>
 
   <script>
