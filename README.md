@@ -14,7 +14,7 @@
     }
     .calculator {
       background-color: #ffffff;
-      border: 2px solid #8B5CF6; /* purple border */
+      border: 2px solid #8B5CF6;
       border-radius: 20px;
       padding: 2rem;
       width: 100%;
@@ -42,7 +42,8 @@
       margin: 1rem auto 2rem;
     }
     label {
-      font-weight: 500;
+      font-weight: 400;
+      font-size: 1.625rem;
       margin-top: 1.5rem;
       display: block;
     }
@@ -50,12 +51,21 @@
       margin-top: 0.5rem;
       width: 100%;
       padding: 0.8rem;
-      font-size: 1rem;
-      border: 1px dashed #F87171;
+      font-size: 1.4rem;
+      border: 1px solid #F87171;
       border-radius: 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-style: italic;
+      color: #a6a6a6;
+    }
+    input[type="number"]:focus, select:focus {
+      outline: none;
+      border: 2px solid #5b01fa;
+      color: #000;
+      font-style: normal;
     }
     select:invalid {
-      color: #999;
+      color: #a6a6a6;
       font-style: italic;
     }
     .checkboxes label {
@@ -90,6 +100,14 @@
       border-top: 1px solid #ccc;
       padding-top: 1rem;
     }
+    #sessionInfo {
+      margin-top: 2rem;
+    }
+    #sessionDetails {
+      margin-top: 1rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #ccc;
+    }
   </style>
 </head>
 <body>
@@ -101,7 +119,7 @@
     <hr />
 
     <label for="learners">Number of Employees to be Trained:</label>
-    <input type="number" id="learners" oninput="toggleEngagementOptions()" />
+    <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number" />
 
     <label for="engagement">Rollout Options:</label>
     <select id="engagement" onchange="toggleEngagementOptions()" required>
