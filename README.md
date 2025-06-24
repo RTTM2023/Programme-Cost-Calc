@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -22,7 +22,7 @@
       border: 2px solid #5b01fa;
       border-radius: 20px;
       padding: 2rem;
-      max-width: 500px;
+      width: 500px;
       flex-shrink: 0;
     }
     .results-box {
@@ -30,8 +30,10 @@
       border-radius: 25px;
       padding: 2rem;
       color: white;
-      max-width: 300px;
-      width: 100%;
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     h1 {
       font-family: 'Unbounded', sans-serif;
@@ -52,7 +54,7 @@
     }
     label {
       font-weight: 400;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       margin-top: 1.5rem;
       display: block;
     }
@@ -111,18 +113,46 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
     }
-    .results-box p {
-      font-size: 1rem;
+    .results-line-item {
+      font-size: 1.25rem;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      justify-content: space-between;
       margin: 0.5rem 0;
-      color: white;
     }
-    .results-box strong {
-      color: white;
+    .results-line-item span:last-child {
+      font-weight: bold;
     }
     .results-box .line {
-      height: 1px;
-      background-color: white;
+      border-top: 1px dotted white;
       margin: 1rem 0;
+    }
+    .total-line {
+      font-size: 1.4rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+    }
+    .results-buttons {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .results-buttons button {
+      border-radius: 25px;
+      padding: 0.75rem;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .submit-btn {
+      background: white;
+      color: #000;
+      border: 1px dashed #5b01fa;
+    }
+    .reset-btn {
+      background: #5b01fa;
+      color: white;
     }
   </style>
 </head>
@@ -164,6 +194,10 @@
     <div class="results-box" id="results">
       <h2>Estimated Rollout Cost</h2>
       <div id="resultsContent"></div>
+      <div class="results-buttons">
+        <button class="submit-btn">Submit interest to RTTM</button>
+        <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
+      </div>
     </div>
   </div>
 
@@ -213,20 +247,27 @@
         engagementCost = sessions * rate;
       }
 
-      let extrasCost = 0;
-      if (kickoff) extrasCost += 15000;
-      if (wrapup) extrasCost += 17500;
+      let resultsHTML = '';
+      resultsHTML += `<div class='results-line-item'><span>Content Cost:</span><span>R${contentCost.toLocaleString()}</span></div>`;
 
+      if (engagementCost > 0) {
+        resultsHTML += `<div class='results-line-item'><span>Engagement Session:</span><span>R${engagementCost.toLocaleString()}</span></div>`;
+      }
+
+      if (kickoff) {
+        resultsHTML += `<div class='results-line-item'><span>Kick-off</span><span>R15,000</span></div>`;
+      }
+      if (wrapup) {
+        resultsHTML += `<div class='results-line-item'><span>Wrap-up</span><span>R17,500</span></div>`;
+      }
+
+      const extrasCost = (kickoff ? 15000 : 0) + (wrapup ? 17500 : 0);
       const totalCost = contentCost + engagementCost + extrasCost;
 
-      const resultsContent = document.getElementById("resultsContent");
-      resultsContent.innerHTML = `
-        <p><strong>Content Cost:</strong> R${contentCost.toLocaleString()}</p>
-        ${engagementCost ? `<p><strong>Engagement Session:</strong> R${engagementCost.toLocaleString()}</p>` : ''}
-        ${extrasCost ? `<p><strong>Optional Extras:</strong> R${extrasCost.toLocaleString()}</p>` : ''}
-        <div class="line"></div>
-        <p><strong>Total Estimated Cost:</strong> R${totalCost.toLocaleString()}</p>
-      `;
+      resultsHTML += `<div class="line"></div>`;
+      resultsHTML += `<div class='total-line'><span>Total Estimated Cost</span><span>R${totalCost.toLocaleString()}</span></div>`;
+
+      document.getElementById("resultsContent").innerHTML = resultsHTML;
     }
   </script>
 </body>
