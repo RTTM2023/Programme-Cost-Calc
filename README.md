@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -40,7 +39,7 @@
       font-size: 1.875rem;
       font-weight: 800;
     }
-    h1 {
+    h1, .results-box h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       font-size: 2rem;
@@ -101,12 +100,8 @@
       border: none;
       border-radius: 30px;
       cursor: pointer;
-    }
-    .results-box h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
       font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
+      text-align: center;
     }
     .results-line-item {
       font-size: 1.25rem;
@@ -144,9 +139,6 @@
       font-family: 'Montserrat', sans-serif;
       text-align: left;
       width: 100%;
-      background-color: #F75D36;
-      color: white;
-      border: none;
     }
     .submit-btn {
       background: white;
