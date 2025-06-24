@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Programme Rollout Cost Calculator</title>
+  <title>Estimated Programme Rollout Cost Calculator</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,6 +13,12 @@
     }
     h1, h2 {
       text-align: center;
+    }
+    h1 em {
+      font-style: italic;
+      font-size: 1rem;
+      display: block;
+      margin-top: 0.5rem;
     }
     label, select, input, button {
       display: block;
@@ -42,37 +48,51 @@
     #sessionDetails {
       margin-top: 0.5rem;
     }
+    .disclaimer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #555;
+      border-top: 1px solid #ccc;
+      padding-top: 1rem;
+    }
   </style>
 </head>
 <body>
-  <h1>Programme Rollout Cost Calculator</h1>
+  <h1>
+    Estimated Programme Rollout Cost Calculator
+    <em>The Line</em>
+  </h1>
 
-  <label for="learners">Number of Learners:</label>
+  <label for="learners">Number of Employees to be Trained:</label>
   <input type="number" id="learners" oninput="toggleEngagementOptions()" />
 
-  <label for="engagement">Engagement Approach:</label>
+  <label for="engagement">Rollout Options:</label>
   <select id="engagement" onchange="toggleEngagementOptions()">
     <option value="elearning">Standard eLearning (Free)</option>
     <option value="team">Team Meeting Rollout (Free)</option>
     <option value="internal">Dedicated Sessions - Internal Facilitation (Free)</option>
-    <option value="external_virtual">Dedicated Sessions - External (Virtual - R3,500/session)</option>
-    <option value="external_inperson">Dedicated Sessions - External (In-person - R4,500/session)</option>
+    <option value="external_virtual">Dedicated Sessions - RTTM Facilitation: Virtual (60 min) - R3,500/session</option>
+    <option value="external_inperson">Dedicated Sessions - RTTM Facilitation: In-person (60 min) - R4,500/session</option>
   </select>
 
   <div id="sessionInfo" style="display:none;">
-    <em>We recommend group sizes of 25 for better engagement. Each group attends 5 sessions.</em>
+    <em>We recommend group sizes of 25 people to allow for better engagement. Each group would attend 5 sessions, 1 per episode of the programme.</em>
     <div id="sessionDetails"></div>
   </div>
 
   <label>Optional Extras:</label>
   <div class="checkboxes">
-    <label><input type="checkbox" id="kickoff" /> Kick-off Session (R15,000)</label>
-    <label><input type="checkbox" id="wrapup" /> Wrap-up Session (R17,500)</label>
+    <label><input type="checkbox" id="kickoff" /> Kick-off Session - Virtual (45 min) - R15,000</label>
+    <label><input type="checkbox" id="wrapup" /> Wrap-up Session - Virtual (60 min) - R17,500</label>
   </div>
 
   <button onclick="calculateTotal()">Calculate</button>
 
   <div class="results" id="results"></div>
+
+  <div class="disclaimer">
+    We use this estimated pricing as a guideline for clients. This is not indicative of the final price charged, given negotiations on budget, as well as using different rollout options within a single rollout project.
+  </div>
 
   <script>
     function toggleEngagementOptions() {
@@ -85,7 +105,7 @@
         const groups = Math.ceil(learners / 25);
         const sessions = groups * 5;
         sessionInfo.style.display = "block";
-        sessionDetails.innerHTML = `<p><strong>Calculation:</strong> ${learners} learners ÷ 25 = ${groups} group(s) × 5 sessions = <strong>${sessions} sessions</strong></p>`;
+        sessionDetails.innerHTML = `<p><strong>Calculation:</strong> ${learners} learners ÷ 25 pax = ${groups} group(s) × 5 sessions = <strong>${sessions} sessions</strong></p>`;
       } else {
         sessionInfo.style.display = "none";
         sessionDetails.innerHTML = "";
@@ -130,7 +150,7 @@
         <h2>Estimated Rollout Cost</h2>
         <p><strong>Content Cost:</strong> R${contentCost.toLocaleString()}</p>
         ${sessions ? `<p><strong>Engagement Sessions:</strong> ${sessions} sessions = R${engagementCost.toLocaleString()}</p>` : ""}
-        <p><strong>Extras:</strong> R${extrasCost.toLocaleString()}</p>
+        <p><strong>Optional Extras:</strong> R${extrasCost.toLocaleString()}</p>
         <p><strong>Total Estimated Cost:</strong> R${totalCost.toLocaleString()}</p>
       `;
     }
