@@ -17,7 +17,6 @@
       gap: 2rem;
       align-items: flex-start;
       width: 1280px;
-      height: 720px;
       margin: 0 auto;
     }
     .calculator {
@@ -38,19 +37,14 @@
       flex-direction: column;
       justify-content: flex-start;
     }
-    h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 33px;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .results-box h2 {
+    h1, .results-box h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 30px;
-      text-align: left;
       margin-bottom: 1rem;
+    }
+    .results-box h2 {
+      text-align: left;
     }
     label {
       font-weight: bold;
@@ -67,22 +61,6 @@
       border-radius: 30px;
       font-family: 'Montserrat', sans-serif;
       background-color: white;
-    }
-    input[type="number"]::placeholder {
-      color: #a6a6a6 !important;
-      font-style: italic;
-      font-family: 'Montserrat', sans-serif;
-    }
-    select:invalid {
-      color: #a6a6a6 !important;
-      font-style: italic;
-      font-family: 'Montserrat', sans-serif;
-    }
-    input[type="number"]:focus, select:focus {
-      outline: none;
-      border: 2px solid #5b01fa;
-      color: #000;
-      font-style: normal;
     }
     .checkboxes label {
       display: flex;
@@ -132,6 +110,11 @@
       display: flex;
       justify-content: space-between;
     }
+    .results-note {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      font-family: 'Montserrat', sans-serif;
+    }
     .results-buttons {
       margin-top: 0.5rem;
       display: none;
@@ -160,11 +143,6 @@
       display: block;
       margin-top: 1rem;
       margin-bottom: 1rem;
-    }
-    .results-note {
-      font-size: 0.9rem;
-      margin-top: 1rem;
-      font-family: 'Montserrat', sans-serif;
     }
     .form-modal {
       display: none;
@@ -208,20 +186,6 @@
   </style>
 </head>
 <body>
-  <div class="form-modal" id="formModal">
-    <div class="form-content">
-      <h3>Submit Your Interest</h3>
-      <form method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <input type="text" name="company" placeholder="Company Name" required />
-        <textarea name="summary" id="costSummary" rows="6" readonly></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </div>
-  </div>
-</head>
-<body>
   <div class="container">
     <div class="calculator">
       <h1>Estimated Programme Rollout Cost Calculator</h1>
@@ -251,10 +215,26 @@
     <div class="results-box" id="results">
       <h2>Estimated Rollout Cost</h2>
       <div id="resultsContent"></div>
+      <div class="results-note">
+        We use this estimated pricing as a guideline for clients. This is not indicative of the final price charged, given negotiations on budget, as well as using different rollout options within a single rollout project.
+      </div>
       <div class="results-buttons" id="resultsButtons">
-        <button class="submit-btn"> Submit Interest to RTTM</button>
+        <button class="submit-btn">Submit Interest to RTTM</button>
         <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
       </div>
+    </div>
+  </div>
+
+  <div class="form-modal" id="formModal">
+    <div class="form-content">
+      <h3>Submit Your Interest</h3>
+      <form method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <input type="text" name="company" placeholder="Company Name" required />
+        <textarea name="summary" id="costSummary" rows="6" readonly></textarea>
+        <button type="submit">Send</button>
+      </form>
     </div>
   </div>
 
@@ -296,10 +276,9 @@
       const contentCost = getContentCost(learners);
 
       let engagementCost = 0;
-      let sessions = 0;
       if (engagement.startsWith("external")) {
         const groups = Math.ceil(learners / 25);
-        sessions = groups * 5;
+        const sessions = groups * 5;
         const rate = engagement === "external_virtual" ? 3500 : 4500;
         engagementCost = sessions * rate;
       }
@@ -321,16 +300,14 @@
       const extrasCost = (kickoff ? 15000 : 0) + (wrapup ? 17500 : 0);
       const totalCost = contentCost + engagementCost + extrasCost;
 
-resultsHTML += `<div class="line"></div>`;
-resultsHTML += `<div class='total-line'><span>Total Estimated Cost</span><span>R${totalCost.toLocaleString()}</span></div>`;
-resultsHTML += `<div class="line"></div>`;
-resultsHTML += `<p class="results-note">We use this estimated pricing as a guideline for clients. This is not indicative of the final price charged, given negotiations on budget, as well as using different rollout options within a single rollout project.</p>`;
-
+      resultsHTML += `<div class="line"></div>`;
+      resultsHTML += `<div class='total-line'><span>Total Estimated Cost</span><span>R${totalCost.toLocaleString()}</span></div>`;
+      resultsHTML += `<div class="line"></div>`;
 
       document.getElementById("resultsContent").innerHTML = resultsHTML;
       document.getElementById("resultsButtons").style.display = "flex";
     }
-  <script>
+
     function showFormWithSummary() {
       const summary = document.getElementById("resultsContent").innerText;
       document.getElementById("costSummary").value = summary;
