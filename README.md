@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -40,14 +41,14 @@
     h1 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 30px;
+      font-size: 33px;
       text-align: center;
       margin-bottom: 1rem;
     }
     .results-box h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 28px;
+      font-size: 30px;
       text-align: left;
       margin-bottom: 1rem;
     }
@@ -135,11 +136,11 @@
       margin-top: 0.5rem;
       display: none;
       flex-direction: column;
-      gap: 0.2rem;
+      gap: 0.3rem;
     }
     .results-buttons button {
       border-radius: 20px;
-      padding: 0.3rem 0.6rem;
+      padding: 0.4rem 0.8rem;
       font-size: 1rem;
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
@@ -165,7 +166,60 @@
       margin-top: 1rem;
       font-family: 'Montserrat', sans-serif;
     }
+    .form-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .form-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      width: 400px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .form-content h3 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    .form-content input, .form-content textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    .form-content button {
+      background: #F75D36;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+    }
   </style>
+</head>
+<body>
+  <div class="form-modal" id="formModal">
+    <div class="form-content">
+      <h3>Submit Your Interest</h3>
+      <form method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <input type="text" name="company" placeholder="Company Name" required />
+        <textarea name="summary" id="costSummary" rows="6" readonly></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
 </head>
 <body>
   <div class="container">
@@ -276,6 +330,14 @@ resultsHTML += `<p class="results-note">We use this estimated pricing as a guide
       document.getElementById("resultsContent").innerHTML = resultsHTML;
       document.getElementById("resultsButtons").style.display = "flex";
     }
+  <script>
+    function showFormWithSummary() {
+      const summary = document.getElementById("resultsContent").innerText;
+      document.getElementById("costSummary").value = summary;
+      document.getElementById("formModal").style.display = "flex";
+    }
+
+    document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
   </script>
 </body>
 </html>
