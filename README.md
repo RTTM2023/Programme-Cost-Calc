@@ -14,7 +14,7 @@
     }
     .calculator {
       background-color: #ffffff;
-      border: 2px solid #8B5CF6;
+      border: 2px solid #5b01fa;
       border-radius: 20px;
       padding: 2rem;
       width: 100%;
@@ -37,7 +37,7 @@
     }
     hr {
       border: none;
-      border-top: 3px solid #8B5CF6;
+      border-top: 3px solid #5b01fa;
       width: 50%;
       margin: 1rem auto 2rem;
     }
@@ -58,15 +58,15 @@
       font-style: italic;
       color: #a6a6a6;
     }
+    input[type="number"]::placeholder, select:invalid {
+      color: #a6a6a6;
+      font-style: italic;
+    }
     input[type="number"]:focus, select:focus {
       outline: none;
       border: 2px solid #5b01fa;
       color: #000;
       font-style: normal;
-    }
-    select:invalid {
-      color: #a6a6a6;
-      font-style: italic;
     }
     .checkboxes label {
       display: flex;
@@ -76,7 +76,7 @@
       font-weight: 400;
     }
     .checkboxes input[type="checkbox"] {
-      accent-color: #8B5CF6;
+      accent-color: #5b01fa;
       transform: scale(1.2);
     }
     button {
@@ -103,10 +103,14 @@
     #sessionInfo {
       margin-top: 2rem;
     }
+    #sessionInfo em {
+      display: block;
+      margin-bottom: 1rem;
+    }
     #sessionDetails {
-      margin-top: 1rem;
-      padding-top: 0.5rem;
+      padding-top: 1rem;
       border-top: 1px solid #ccc;
+      font-weight: 500;
     }
   </style>
 </head>
