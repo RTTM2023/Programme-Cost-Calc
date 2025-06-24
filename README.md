@@ -1,3 +1,4 @@
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -36,15 +37,14 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      font-size: 1.875rem;
-      font-weight: 800;
     }
     h1, .results-box h2 {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 2rem;
+      font-weight: 700;
+      font-size: 2.06rem;
       text-align: center;
       margin-bottom: 1rem;
+      font-size: 33px;
     }
     label {
       font-weight: bold;
@@ -135,8 +135,9 @@
     .results-buttons button {
       border-radius: 25px;
       padding: 1rem;
-      font-size: 1.2rem;
+      font-size: 20px;
       font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
       text-align: left;
       width: 100%;
     }
