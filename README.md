@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -12,13 +12,26 @@
       justify-content: center;
       padding: 3rem;
     }
+    .container {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
     .calculator {
       background-color: #ffffff;
       border: 2px solid #5b01fa;
       border-radius: 20px;
       padding: 2rem;
       width: 100%;
-      max-width: 600px;
+      max-width: 500px;
+    }
+    .results-box {
+      background-color: #F75D36;
+      border-radius: 25px;
+      padding: 2rem;
+      color: white;
+      max-width: 300px;
+      width: 100%;
     }
     h1 {
       font-family: 'Unbounded', sans-serif;
@@ -109,42 +122,64 @@
       border-top: 1px solid #ccc;
       font-weight: 500;
     }
+    .results-box h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-family: 'Unbounded', sans-serif;
+    }
+    .results-box p {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+      color: white;
+    }
+    .results-box strong {
+      color: white;
+    }
   </style>
 </head>
 <body>
-  <div class="calculator">
-    <h1>
-      Estimated Programme Rollout Cost Calculator
-      <em>The Line</em>
-    </h1>
+  <div class="container">
+    <div class="calculator">
+      <h1>
+        Estimated Programme Rollout Cost Calculator
+        <em>The Line</em>
+      </h1>
 
-    <label for="learners">Number of Employees to be Trained:</label>
-    <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number" />
+      <label for="learners">Number of Employees to be Trained:</label>
+      <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number" />
 
-    <label for="engagement">Rollout Options:</label>
-    <select id="engagement" onchange="toggleEngagementOptions()" required>
-      <option value="" disabled selected hidden>Please select a rollout option from the dropdown below</option>
-      <option value="elearning">Standard eLearning (Free)</option>
-      <option value="team">Team Meeting Rollout (Free)</option>
-      <option value="internal">Dedicated Sessions - Internal Facilitation (Free)</option>
-      <option value="external_virtual">Dedicated Sessions - RTTM Facilitation: Virtual (60 min) - R3,500/session</option>
-      <option value="external_inperson">Dedicated Sessions - RTTM Facilitation: In-person (60 min) - R4,500/session</option>
-    </select>
+      <label for="engagement">Rollout Options:</label>
+      <select id="engagement" onchange="toggleEngagementOptions()" required>
+        <option value="" disabled selected hidden>Please select a rollout option from the dropdown below</option>
+        <option value="elearning">Standard eLearning (Free)</option>
+        <option value="team">Team Meeting Rollout (Free)</option>
+        <option value="internal">Dedicated Sessions - Internal Facilitation (Free)</option>
+        <option value="external_virtual">Dedicated Sessions - RTTM Facilitation: Virtual (60 min) - R3,500/session</option>
+        <option value="external_inperson">Dedicated Sessions - RTTM Facilitation: In-person (60 min) - R4,500/session</option>
+      </select>
 
-    <div id="sessionInfo" style="display:none;">
-      <em>We recommend group sizes of 25 people to allow for better engagement. Each group would attend 5 sessions, 1 per episode of the programme.</em>
-      <div id="sessionDetails"></div>
+      <div id="sessionInfo" style="display:none;">
+        <em>We recommend group sizes of 25 people to allow for better engagement. Each group would attend 5 sessions, 1 per episode of the programme.</em>
+        <div id="sessionDetails"></div>
+      </div>
+
+      <label>Optional Extras:</label>
+      <div class="checkboxes">
+        <label><input type="checkbox" id="kickoff" /> Kick-off Session - Virtual (45 min) - R15,000</label>
+        <label><input type="checkbox" id="wrapup" /> Wrap-up Session - Virtual (60 min) - R17,500</label>
+      </div>
+
+      <button onclick="calculateTotal()">Calculate</button>
     </div>
 
-    <label>Optional Extras:</label>
-    <div class="checkboxes">
-      <label><input type="checkbox" id="kickoff" /> Kick-off Session - Virtual (45 min) - R15,000</label>
-      <label><input type="checkbox" id="wrapup" /> Wrap-up Session - Virtual (60 min) - R17,500</label>
+    <div class="results-box" id="results">
+      <h2>Estimated Rollout Cost</h2>
+      <p><strong>Content Cost:</strong> RXXX</p>
+      <p><strong>Engagement Session:</strong> RXXX</p>
+      <p><strong>Optional Extras:</strong> RXXX</p>
+      <hr style="margin: 1rem 0; border-color: white;">
+      <p><strong>Total Estimated Cost:</strong> RXXX</p>
     </div>
-
-    <button onclick="calculateTotal()">Calculate</button>
-
-    <div class="results" id="results"></div>
   </div>
 
   <script>
@@ -173,7 +208,7 @@
       else if (learners > 2000) rate = 390;
       else if (learners > 1000) rate = 420;
       const total = learners * rate;
-      return Math.min(total, 3500000); // cap at R3.5m
+      return Math.min(total, 3500000);
     }
 
     function calculateTotal() {
@@ -202,8 +237,9 @@
       document.getElementById("results").innerHTML = `
         <h2>Estimated Rollout Cost</h2>
         <p><strong>Content Cost:</strong> R${contentCost.toLocaleString()}</p>
-        ${sessions ? `<p><strong>Engagement Sessions:</strong> ${sessions} sessions = R${engagementCost.toLocaleString()}</p>` : ""}
+        <p><strong>Engagement Session:</strong> R${engagementCost.toLocaleString()}</p>
         <p><strong>Optional Extras:</strong> R${extrasCost.toLocaleString()}</p>
+        <hr style="margin: 1rem 0; border-color: white;">
         <p><strong>Total Estimated Cost:</strong> R${totalCost.toLocaleString()}</p>
       `;
     }
