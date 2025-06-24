@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -35,13 +35,20 @@
       border: none;
       cursor: pointer;
     }
+    #sessionInfo {
+      margin-top: 1rem;
+      font-style: italic;
+    }
+    #sessionDetails {
+      margin-top: 0.5rem;
+    }
   </style>
 </head>
 <body>
   <h1>Programme Rollout Cost Calculator</h1>
 
   <label for="learners">Number of Learners:</label>
-  <input type="number" id="learners" />
+  <input type="number" id="learners" oninput="toggleEngagementOptions()" />
 
   <label for="engagement">Engagement Approach:</label>
   <select id="engagement" onchange="toggleEngagementOptions()">
@@ -52,8 +59,9 @@
     <option value="external_inperson">Dedicated Sessions - External (In-person - R4,500/session)</option>
   </select>
 
-  <div id="sessionInfo" style="display:none; margin-top:1rem;">
+  <div id="sessionInfo" style="display:none;">
     <em>We recommend group sizes of 25 for better engagement. Each group attends 5 sessions.</em>
+    <div id="sessionDetails"></div>
   </div>
 
   <label>Optional Extras:</label>
@@ -68,12 +76,19 @@
 
   <script>
     function toggleEngagementOptions() {
+      const learners = parseInt(document.getElementById("learners").value) || 0;
       const engagement = document.getElementById("engagement").value;
       const sessionInfo = document.getElementById("sessionInfo");
-      if (engagement.startsWith("external")) {
+      const sessionDetails = document.getElementById("sessionDetails");
+
+      if (engagement.startsWith("external") && learners > 0) {
+        const groups = Math.ceil(learners / 25);
+        const sessions = groups * 5;
         sessionInfo.style.display = "block";
+        sessionDetails.innerHTML = `<p><strong>Calculation:</strong> ${learners} learners ÷ 25 = ${groups} group(s) × 5 sessions = <strong>${sessions} sessions</strong></p>`;
       } else {
         sessionInfo.style.display = "none";
+        sessionDetails.innerHTML = "";
       }
     }
 
