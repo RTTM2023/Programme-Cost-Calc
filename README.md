@@ -49,13 +49,13 @@
       border: 1px dashed #F87171;
       border-radius: 30px;
       font-family: 'Montserrat', sans-serif;
-      font-style: italic;
-      color: #a6a6a6;
       background-color: white;
     }
-    input[type="number"]::placeholder, select:invalid {
-      color: #a6a6a6;
+    input[type="number"]::placeholder,
+    select:invalid {
+      color: #a6a6a6 !important;
       font-style: italic;
+      font-family: 'Montserrat', sans-serif;
     }
     input[type="number"]:focus, select:focus {
       outline: none;
