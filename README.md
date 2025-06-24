@@ -215,9 +215,6 @@
     <div class="results-box" id="results">
       <h2>Estimated Rollout Cost</h2>
       <div id="resultsContent"></div>
-      <div class="results-note">
-        We use this estimated pricing as a guideline for clients. This is not indicative of the final price charged, given negotiations on budget, as well as using different rollout options within a single rollout project.
-      </div>
       <div class="results-buttons" id="resultsButtons">
         <button class="submit-btn">Submit Interest to RTTM</button>
         <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
