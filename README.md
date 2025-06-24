@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -16,13 +16,15 @@
       display: flex;
       gap: 2rem;
       align-items: flex-start;
+      width: 1280px;
+      height: 720px;
     }
     .calculator {
       background-color: #ffffff;
-      border: 2px solid #5b01fa;
+      border: 2px solid #F75C36;
       border-radius: 20px;
       padding: 2rem;
-      width: 500px;
+      width: 650px;
       flex-shrink: 0;
     }
     .results-box {
@@ -30,10 +32,10 @@
       border-radius: 25px;
       padding: 2rem;
       color: white;
-      width: 400px;
+      width: 450px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
     }
     h1 {
       font-family: 'Unbounded', sans-serif;
@@ -135,20 +137,28 @@
     }
     .results-buttons {
       margin-top: 1rem;
-      display: flex;
+      display: none;
       flex-direction: column;
       gap: 0.5rem;
     }
     .results-buttons button {
       border-radius: 25px;
       padding: 0.75rem;
-      font-size: 1rem;
-      font-weight: bold;
+      font-size: 1.2rem;
+      font-family: 'Montserrat', sans-serif;
+      text-align: right;
     }
     .submit-btn {
       background: white;
       color: #000;
       border: 1px dashed #5b01fa;
+    }
+    .submit-btn::after {
+      content: '\2713';
+      float: right;
+      margin-left: 10px;
+      color: #5b01fa;
+      font-weight: bold;
     }
     .reset-btn {
       background: #5b01fa;
@@ -163,10 +173,8 @@
         Estimated Programme Rollout Cost Calculator
         <em>The Line</em>
       </h1>
-
       <label for="learners">Number of Employees to be Trained:</label>
       <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number" />
-
       <label for="engagement">Rollout Options:</label>
       <select id="engagement" onchange="toggleEngagementOptions()" required>
         <option value="" disabled selected hidden>Please select a rollout option from the dropdown below</option>
@@ -176,25 +184,22 @@
         <option value="external_virtual">Dedicated Sessions - RTTM Facilitation: Virtual (60 min) - R3,500/session</option>
         <option value="external_inperson">Dedicated Sessions - RTTM Facilitation: In-person (60 min) - R4,500/session</option>
       </select>
-
       <div id="sessionInfo" style="display:none;">
         <em>We recommend group sizes of 25 people to allow for better engagement. Each group would attend 5 sessions, 1 per episode of the programme.</em>
         <div id="sessionDetails"></div>
       </div>
-
       <label>Optional Extras:</label>
       <div class="checkboxes">
         <label><input type="checkbox" id="kickoff" /> Kick-off Session - Virtual (45 min) - R15,000</label>
         <label><input type="checkbox" id="wrapup" /> Wrap-up Session - Virtual (60 min) - R17,500</label>
       </div>
-
       <button onclick="calculateTotal()">Calculate</button>
     </div>
 
     <div class="results-box" id="results">
       <h2>Estimated Rollout Cost</h2>
       <div id="resultsContent"></div>
-      <div class="results-buttons">
+      <div class="results-buttons" id="resultsButtons">
         <button class="submit-btn">Submit interest to RTTM</button>
         <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
       </div>
@@ -266,8 +271,10 @@
 
       resultsHTML += `<div class="line"></div>`;
       resultsHTML += `<div class='total-line'><span>Total Estimated Cost</span><span>R${totalCost.toLocaleString()}</span></div>`;
+      resultsHTML += `<div class="line"></div>`;
 
       document.getElementById("resultsContent").innerHTML = resultsHTML;
+      document.getElementById("resultsButtons").style.display = "flex";
     }
   </script>
 </body>
