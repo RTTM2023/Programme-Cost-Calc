@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -34,6 +34,8 @@
       font-size: 1.25rem;
       font-weight: 500;
       margin-bottom: 1.5rem;
+      border-bottom: 2px solid #5b01fa;
+      padding-bottom: 0.5rem;
     }
     label {
       font-weight: 400;
@@ -51,7 +53,11 @@
       font-family: 'Montserrat', sans-serif;
       background-color: white;
     }
-    input[type="number"]::placeholder,
+    input[type="number"]::placeholder {
+      color: #a6a6a6;
+      font-style: italic;
+      font-family: 'Montserrat', sans-serif;
+    }
     select:invalid {
       color: #a6a6a6 !important;
       font-style: italic;
