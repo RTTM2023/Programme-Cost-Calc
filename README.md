@@ -1,250 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Estimated Programme Rollout Cost Calculator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', sans-serif;
-      background-color: #f1ecec;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+<title>Estimated Programme Rollout Cost Calculator</title> <style> body { background-color: #F1ECEC; font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; padding: 3rem; } .container { display: flex; gap: 2rem; align-items: flex-start; } .calculator { background-color: #ffffff; border: 2px solid #5b01fa; border-radius: 20px; padding: 2rem; width: 100%; max-width: 500px; } .results-box { background-color: #F75D36; border-radius: 25px; padding: 2rem; color: white; max-width: 300px; width: 100%; } h1 { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 2.2rem; text-align: center; margin-bottom: 0.25rem; } h1 em { display: block; font-family: 'Montserrat', sans-serif; font-style: italic; font-size: 1.25rem; font-weight: 500; margin-bottom: 1.5rem; border-bottom: 2px solid #5b01fa; padding-bottom: 0.5rem; } label { font-weight: 400; font-size: 1.2rem; margin-top: 1.5rem; display: block; } input[type="number"], select { margin-top: 0.5rem; width: 100%; padding: 0.6rem 1rem; font-size: 1rem; border: 1px dashed #F87171; border-radius: 30px; font-family: 'Montserrat', sans-serif; background-color: white; } input[type="number"]::placeholder { color: #a6a6a6 !important; font-style: italic; font-family: 'Montserrat', sans-serif; } select:invalid { color: #a6a6a6 !important; font-style: italic; font-family: 'Montserrat', sans-serif; } input[type="number"]:focus, select:focus { outline: none; border: 2px solid #5b01fa; color: #000; font-style: normal; } .checkboxes label { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; font-weight: 400; font-size: 1rem; } .checkboxes input[type="checkbox"] { accent-color: #5b01fa; transform: scale(1.2); } button { margin-top: 2rem; width: 100%; padding: 1rem; font-size: 1.2rem; background-color: #F75D36; color: white; border: none; border-radius: 30px; cursor: pointer; } .results { margin-top: 2rem; } #sessionInfo { margin-top: 2rem; } #sessionInfo em { display: block; margin-bottom: 1rem; font-size: 1rem; color: #333; } #sessionDetails { padding-top: 1rem; border-top: 1px solid #ccc; font-weight: 500; } .results-box h2 { font-size: 1.5rem; margin-bottom: 1rem; font-family: 'Unbounded', sans-serif; } .results-box p { font-size: 1rem; margin: 0.5rem 0; color: white; } .results-box strong { color: white; } </style>
+Estimated Programme Rollout Cost Calculator The Line
+  <label for="learners">Number of Employees to be Trained:</label>
+  <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number" />
 
-    .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 40px;
-      width: 1280px;
-    }
+  <label for="engagement">Rollout Options:</label>
+  <select id="engagement" onchange="toggleEngagementOptions()" required>
+    <option value="" disabled selected hidden>Please select a rollout option from the dropdown below</option>
+    <option value="elearning">Standard eLearning (Free)</option>
+    <option value="team">Team Meeting Rollout (Free)</option>
+    <option value="internal">Dedicated Sessions - Internal Facilitation (Free)</option>
+    <option value="external_virtual">Dedicated Sessions - RTTM Facilitation: Virtual (60 min) - R3,500/session</option>
+    <option value="external_inperson">Dedicated Sessions - RTTM Facilitation: In-person (60 min) - R4,500/session</option>
+  </select>
 
-    .calculator {
-      background-color: white;
-      border: 3px solid #F75C36;
-      padding: 30px;
-      width: 650px;
-      border-radius: 20px;
-    }
-
-    .calculator h1 {
-      font-size: 33px;
-      font-weight: 800;
-      margin-bottom: 30px;
-    }
-
-    label {
-      display: block;
-      margin: 20px 0 8px;
-      font-size: 26px;
-      font-weight: bold;
-    }
-
-    input[type="number"],
-    select {
-      width: 100%;
-      padding: 10px;
-      font-size: 23px;
-      font-style: italic;
-      font-family: 'Montserrat', sans-serif;
-      color: #a6a6a6;
-      border: 2px dotted #ccc;
-      border-radius: 5px;
-    }
-
-    input[type="number"]:focus,
-    select:focus {
-      outline: none;
-      border-color: #5b01fa;
-      color: black;
-    }
-
-    .checkboxes label {
-      display: block;
-      margin: 10px 0;
-      font-size: 23px;
-      font-weight: normal;
-    }
-
-    button {
-      margin-top: 25px;
-      padding: 10px 20px;
-      font-size: 20px;
-      background-color: #5b01fa;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .results-box {
-      background-color: white;
-      padding: 30px;
-      border-radius: 20px;
-      width: 500px;
-      min-height: 400px;
-    }
-
-    .results-box h2 {
-      font-size: 30px;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
-
-    .results-line-item {
-      display: flex;
-      justify-content: space-between;
-      font-size: 20px;
-      font-weight: 400;
-      margin: 10px 0;
-    }
-
-    .results-line-item span:last-child {
-      font-weight: 700;
-    }
-
-    .line {
-      border-top: 2px dotted #ccc;
-      margin: 15px 0;
-    }
-
-    .total-line {
-      display: flex;
-      justify-content: space-between;
-      font-size: 23px;
-      font-weight: 800;
-    }
-
-    .results-buttons {
-      margin-top: 25px;
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .submit-btn,
-    .reset-btn {
-      background-color: #5b01fa;
-      color: white;
-      font-size: 23px;
-      padding: 10px 20px;
-      border-radius: 5px;
-      width: fit-content;
-      text-align: left;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="calculator">
-      <h1>Estimated Programme Rollout Cost Calculator</h1>
-
-      <label for="employees">Number of Employees to be Trained:</label>
-      <input type="number" id="employees" placeholder="Enter total number" />
-
-      <label for="rollout">Rollout Options:</label>
-      <select id="rollout">
-        <option value="" disabled selected>Please select a rollout option from the dropdown below</option>
-        <option value="standard">Standard eLearning (Free)</option>
-        <option value="team">Team Meeting Rollout (Free)</option>
-        <option value="internal">Dedicated Sessions - Internal Facilitation (Free)</option>
-        <option value="external-virtual">Dedicated Sessions - RTTM Facilitation: Virtual (R3,500/session)</option>
-        <option value="external-inperson">Dedicated Sessions - RTTM Facilitation: In-person (R4,500/session)</option>
-      </select>
-
-      <div id="sessionDetails" style="display: none;">
-        <div style="height: 1rem;"></div>
-        <p>We recommend group sizes of 25 people to allow for better engagement. Each group would attend 5 sessions, 1 per episode of the programme.</p>
-        <div style="height: 1rem;"></div>
-        <p id="sessionCalc"></p>
-      </div>
-
-      <label>Optional Extras:</label>
-      <div class="checkboxes">
-        <label><input type="checkbox" id="kickoff" /> Kick-off Session - Virtual (45 min) - R15,000</label>
-        <label><input type="checkbox" id="wrapup" /> Wrap-up Session - Virtual (60 min) - R17,500</label>
-      </div>
-
-      <button onclick="calculateCost()">Calculate</button>
-    </div>
-
-    <div class="results-box">
-      <h2>Estimated Rollout Cost</h2>
-      <div id="results"></div>
-      <div class="results-buttons" id="actionButtons">
-        <button class="submit-btn">✔ Submit Interest to RTTM</button>
-        <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
-      </div>
-    </div>
+  <div id="sessionInfo" style="display:none;">
+    <em>We recommend group sizes of 25 people to allow for better engagement. Each group would attend 5 sessions, 1 per episode of the programme.</em>
+    <div id="sessionDetails"></div>
   </div>
 
-  <script>
-    function calculateCost() {
-      const employees = parseInt(document.getElementById('employees').value);
-      const rollout = document.getElementById('rollout').value;
-      const kickoff = document.getElementById('kickoff').checked;
-      const wrapup = document.getElementById('wrapup').checked;
-      const sessionDetails = document.getElementById('sessionDetails');
-      const sessionCalc = document.getElementById('sessionCalc');
-      const results = document.getElementById('results');
-      const actionButtons = document.getElementById('actionButtons');
+  <label>Optional Extras:</label>
+  <div class="checkboxes">
+    <label><input type="checkbox" id="kickoff" /> Kick-off Session - Virtual (45 min) - R15,000</label>
+    <label><input type="checkbox" id="wrapup" /> Wrap-up Session - Virtual (60 min) - R17,500</label>
+  </div>
 
-      if (!employees || !rollout) return;
+  <button onclick="calculateTotal()">Calculate</button>
+</div>
 
-      let pricePerLearner = 0;
-      if (employees <= 1000) pricePerLearner = 450;
-      else if (employees <= 2000) pricePerLearner = 420;
-      else if (employees <= 3000) pricePerLearner = 390;
-      else if (employees <= 4000) pricePerLearner = 360;
-      else if (employees <= 5000) pricePerLearner = 330;
-      else pricePerLearner = 300;
+<div class="results-box" id="results">
+  <h2>Estimated Rollout Cost</h2>
+  <p><strong>Content Cost:</strong> RXXX</p>
+  <p><strong>Engagement Session:</strong> RXXX</p>
+  <p><strong>Optional Extras:</strong> RXXX</p>
+  <hr style="margin: 1rem 0; border-color: white;">
+  <p><strong>Total Estimated Cost:</strong> RXXX</p>
+</div>
+<script> function toggleEngagementOptions() { const learners = parseInt(document.getElementById("learners").value) || 0; const engagement = document.getElementById("engagement").value; const sessionInfo = document.getElementById("sessionInfo"); const sessionDetails = document.getElementById("sessionDetails"); if (engagement.startsWith("external") && learners > 0) { const groups = Math.ceil(learners / 25); const sessions = groups * 5; sessionInfo.style.display = "block"; sessionDetails.innerHTML = `
+Calculation: ${learners} learners ÷ 25 pax = ${groups} group(s) × 5 sessions = ${sessions} sessions
 
-      let contentCost = pricePerLearner * employees;
-      if (contentCost > 3500000) contentCost = 3500000;
+`; } else { sessionInfo.style.display = "none"; sessionDetails.innerHTML = ""; } } function getContentCost(learners) { let rate = 450; if (learners > 5000) rate = 300; else if (learners > 4000) rate = 330; else if (learners > 3000) rate = 360; else if (learners > 2000) rate = 390; else if (learners > 1000) rate = 420; const total = learners * rate; return Math.min(total, 3500000); } function calculateTotal() { const learners = parseInt(document.getElementById("learners").value) || 0; const engagement = document.getElementById("engagement").value; const kickoff = document.getElementById("kickoff").checked; const wrapup = document.getElementById("wrapup").checked; const contentCost = getContentCost(learners); let engagementCost = 0; let sessions = 0; if (engagement.startsWith("external")) { const groups = Math.ceil(learners / 25); sessions = groups * 5; const rate = engagement === "external_virtual" ? 3500 : 4500; engagementCost = sessions * rate; } let extrasCost = 0; if (kickoff) extrasCost += 15000; if (wrapup) extrasCost += 17500; const totalCost = contentCost + engagementCost + extrasCost; document.getElementById("results").innerHTML = `
+Estimated Rollout Cost
+Content Cost: R${contentCost.toLocaleString()}
 
-      let engagementCost = 0;
-      if (rollout.includes("external")) {
-        const groups = Math.ceil(employees / 25);
-        const totalSessions = groups * 5;
-        const sessionRate = rollout === "external-virtual" ? 3500 : 4500;
-        engagementCost = totalSessions * sessionRate;
-        sessionCalc.textContent = `${employees} learners ÷ 25 pax = ${groups} group(s) × 5 sessions = ${totalSessions} sessions`;
-        sessionDetails.style.display = 'block';
-      } else {
-        sessionDetails.style.display = 'none';
-      }
+Engagement Session: R${engagementCost.toLocaleString()}
 
-      let extrasCost = 0;
-      const extras = [];
-      if (kickoff) {
-        extras.push(['Kick-off Session', 15000]);
-        extrasCost += 15000;
-      }
-      if (wrapup) {
-        extras.push(['Wrap-up Session', 17500]);
-        extrasCost += 17500;
-      }
+Optional Extras: R${extrasCost.toLocaleString()}
 
-      const total = contentCost + engagementCost + extrasCost;
+Total Estimated Cost: R${totalCost.toLocaleString()}
 
-      results.innerHTML = '';
-      results.innerHTML += `<div class='results-line-item'><span>Content Cost:</span><span>R${contentCost.toLocaleString()}</span></div>`;
-      if (engagementCost > 0) results.innerHTML += `<div class='results-line-item'><span>Engagement Sessions:</span><span>R${engagementCost.toLocaleString()}</span></div>`;
-      extras.forEach(([name, cost]) => {
-        results.innerHTML += `<div class='results-line-item'><span>${name}:</span><span>R${cost.toLocaleString()}</span></div>`;
-      });
-      results.innerHTML += `<div class='line'></div>`;
-      results.innerHTML += `<div class='total-line'><span>Total Estimated Cost:</span><span>R${total.toLocaleString()}</span></div>`;
-      results.innerHTML += `<div class='line'></div>`;
-
-      actionButtons.style.display = 'flex';
-    }
-  </script>
-</body>
-</html>
+`; } </script>
