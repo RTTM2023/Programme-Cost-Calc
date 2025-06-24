@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -54,7 +54,7 @@
       background-color: white;
     }
     input[type="number"]::placeholder {
-      color: #a6a6a6;
+      color: #a6a6a6 !important;
       font-style: italic;
       font-family: 'Montserrat', sans-serif;
     }
