@@ -4,8 +4,140 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Estimated Programme Rollout Cost Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
   <style>
-    /* [CSS remains unchanged — preserved from previous state] */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f1ecec;
+      width: 1280px;
+      height: 720px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 50px;
+    }
+
+    .calculator {
+      background-color: white;
+      border: 3px solid #F75C36;
+      padding: 30px;
+      width: 650px;
+      border-radius: 20px;
+    }
+
+    .calculator h1 {
+      font-size: 33px;
+      font-weight: 800;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin: 20px 0 8px;
+      font-weight: bold;
+      font-size: 26px;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 23px;
+      font-style: italic;
+      font-family: 'Montserrat', sans-serif;
+      color: #a6a6a6;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="number"]:focus,
+    select:focus {
+      outline: none;
+      border-color: #5b01fa;
+      color: black;
+    }
+
+    .checkboxes label {
+      display: block;
+      margin: 10px 0;
+      font-weight: normal;
+      font-size: 23px;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 10px 20px;
+      font-size: 20px;
+      background-color: #5b01fa;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .results-box {
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      width: 500px;
+      min-height: 400px;
+    }
+
+    .results-box h2 {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .results-line-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 20px;
+      font-weight: 400;
+      margin: 10px 0;
+    }
+
+    .results-line-item span:last-child {
+      font-weight: 700;
+    }
+
+    .line {
+      border-top: 2px dotted #ccc;
+      margin: 15px 0;
+    }
+
+    .total-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .results-buttons {
+      margin-top: 25px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .submit-btn,
+    .reset-btn {
+      background-color: #5b01fa;
+      color: white;
+      font-size: 23px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      width: fit-content;
+      text-align: left;
+    }
   </style>
 </head>
 <body>
@@ -46,7 +178,7 @@
       <h2>Estimated Rollout Cost</h2>
       <div id="results"></div>
       <div class="results-buttons" id="actionButtons">
-        <button class="submit-btn">Submit Interest to RTTM</button>
+        <button class="submit-btn">✔ Submit Interest to RTTM</button>
         <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
       </div>
     </div>
@@ -65,7 +197,6 @@
 
       if (!employees || !rollout) return;
 
-      // Content pricing tiers
       let pricePerLearner = 0;
       if (employees <= 1000) pricePerLearner = 450;
       else if (employees <= 2000) pricePerLearner = 420;
@@ -77,9 +208,7 @@
       let contentCost = pricePerLearner * employees;
       if (contentCost > 3500000) contentCost = 3500000;
 
-      // Session cost calculation
       let engagementCost = 0;
-      let sessionsText = '';
       if (rollout.includes("external")) {
         const groups = Math.ceil(employees / 25);
         const totalSessions = groups * 5;
@@ -91,7 +220,6 @@
         sessionDetails.style.display = 'none';
       }
 
-      // Optional Extras
       let extrasCost = 0;
       const extras = [];
       if (kickoff) {
@@ -105,7 +233,6 @@
 
       const total = contentCost + engagementCost + extrasCost;
 
-      // Populate results box
       results.innerHTML = '';
       results.innerHTML += `<div class='results-line-item'><span>Content Cost:</span><span>R${contentCost.toLocaleString()}</span></div>`;
       if (engagementCost > 0) results.innerHTML += `<div class='results-line-item'><span>Engagement Sessions:</span><span>R${engagementCost.toLocaleString()}</span></div>`;
@@ -116,7 +243,6 @@
       results.innerHTML += `<div class='total-line'><span>Total Estimated Cost:</span><span>R${total.toLocaleString()}</span></div>`;
       results.innerHTML += `<div class='line'></div>`;
 
-      // Show buttons
       actionButtons.style.display = 'flex';
     }
   </script>
