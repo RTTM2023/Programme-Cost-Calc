@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -22,8 +22,8 @@
       border: 2px solid #5b01fa;
       border-radius: 20px;
       padding: 2rem;
-      width: 100%;
       max-width: 500px;
+      flex-shrink: 0;
     }
     .results-box {
       background-color: #F75D36;
@@ -52,7 +52,7 @@
     }
     label {
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       margin-top: 1.5rem;
       display: block;
     }
@@ -105,27 +105,11 @@
       border-radius: 30px;
       cursor: pointer;
     }
-    .results {
-      margin-top: 2rem;
-    }
-    #sessionInfo {
-      margin-top: 2rem;
-    }
-    #sessionInfo em {
-      display: block;
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      color: #333;
-    }
-    #sessionDetails {
-      padding-top: 1rem;
-      border-top: 1px solid #ccc;
-      font-weight: 500;
-    }
     .results-box h2 {
-      font-size: 1.5rem;
+      font-size: 2rem;
       margin-bottom: 1rem;
-      font-family: 'Unbounded', sans-serif;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
     }
     .results-box p {
       font-size: 1rem;
@@ -134,6 +118,11 @@
     }
     .results-box strong {
       color: white;
+    }
+    .results-box .line {
+      height: 1px;
+      background-color: white;
+      margin: 1rem 0;
     }
   </style>
 </head>
@@ -174,11 +163,7 @@
 
     <div class="results-box" id="results">
       <h2>Estimated Rollout Cost</h2>
-      <p><strong>Content Cost:</strong> RXXX</p>
-      <p><strong>Engagement Session:</strong> RXXX</p>
-      <p><strong>Optional Extras:</strong> RXXX</p>
-      <hr style="margin: 1rem 0; border-color: white;">
-      <p><strong>Total Estimated Cost:</strong> RXXX</p>
+      <div id="resultsContent"></div>
     </div>
   </div>
 
@@ -234,12 +219,12 @@
 
       const totalCost = contentCost + engagementCost + extrasCost;
 
-      document.getElementById("results").innerHTML = `
-        <h2>Estimated Rollout Cost</h2>
+      const resultsContent = document.getElementById("resultsContent");
+      resultsContent.innerHTML = `
         <p><strong>Content Cost:</strong> R${contentCost.toLocaleString()}</p>
-        <p><strong>Engagement Session:</strong> R${engagementCost.toLocaleString()}</p>
-        <p><strong>Optional Extras:</strong> R${extrasCost.toLocaleString()}</p>
-        <hr style="margin: 1rem 0; border-color: white;">
+        ${engagementCost ? `<p><strong>Engagement Session:</strong> R${engagementCost.toLocaleString()}</p>` : ''}
+        ${extrasCost ? `<p><strong>Optional Extras:</strong> R${extrasCost.toLocaleString()}</p>` : ''}
+        <div class="line"></div>
         <p><strong>Total Estimated Cost:</strong> R${totalCost.toLocaleString()}</p>
       `;
     }
