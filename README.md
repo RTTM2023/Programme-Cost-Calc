@@ -87,6 +87,16 @@ select {
   background-size: 1rem;
   padding-right: 2.5rem;
 }
+input[type="number"] {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px dashed #F87171;
+  border-radius: 30px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: white;
+}
 input[type="number"]::placeholder {
   color: #a6a6a6 !important;
   font-style: italic;
