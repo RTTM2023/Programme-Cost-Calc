@@ -319,38 +319,19 @@
   </div>
 
   <div class="form-modal" id="formModal">
+    <span onclick="closeForm()" style="position:absolute; top:20px; right:25px; font-size:1.5rem; color:white; cursor:pointer;">&times;</span>
     <div class="form-content">
-      <button class="close-form" onclick="document.getElementById('formModal').style.display = 'none';">&times;</button>
       <h3>Submit Your Interest</h3>
-      <form method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+      <form method="POST" action="https://formspree.io/f/movwpwek">
         <input type="text" name="name" placeholder="Your Name" required />
         <input type="email" name="email" placeholder="Your Email" required />
         <input type="text" name="company" placeholder="Company Name" required />
-        <input type="text" name="programme" id="formProgramme" placeholder="Programme" readonly />
-        <input type="text" name="headcount" id="formHeadcount" placeholder="Total Headcount" readonly />
         <textarea name="summary" id="costSummary" rows="6" readonly></textarea>
         <button type="submit">Send</button>
       </form>
     </div>
   </div>
 
-  <script>
-    window.addEventListener('DOMContentLoaded', function () {
-      document.querySelectorAll('.submit-btn').forEach(btn => {
-        btn.addEventListener('click', showFormWithSummary);
-      });
-    });
-
-    function showFormWithSummary() {
-      const summary = document.getElementById("resultsContent").innerText;
-      const programme = document.getElementById("programme").options[document.getElementById("programme").selectedIndex].text;
-      const headcount = document.getElementById("learners").value;
-
-      document.getElementById("formProgramme").value = programme;
-      document.getElementById("formHeadcount").value = headcount;
-      document.getElementById("costSummary").value = summary;
-      document.getElementById("formModal").style.display = "flex";
-    }
   <script>
     function toggleProgramme() {
       toggleEngagementOptions();
