@@ -7,7 +7,7 @@
     body {
       background-color: transparent;
       font-family: 'Montserrat', sans-serif;
-      padding: 2rem 0.25rem;
+      padding: 0rem;
       margin: 0;
       overflow-x: hidden;
     }
