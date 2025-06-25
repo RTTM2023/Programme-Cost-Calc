@@ -322,7 +322,7 @@
   <div class="form-content">
     <button class="close-form" onclick="document.getElementById('formModal').style.display = 'none';">&times;</button>
     <h3>Submit Your Interest</h3>
-    <form method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+    <form method="POST" action="https://formspree.io/f/movwpwek">
       <input type="text" name="name" placeholder="Your Name" required />
       <input type="email" name="email" placeholder="Your Email" required />
       <input type="text" name="company" placeholder="Company Name" required />
