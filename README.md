@@ -278,6 +278,10 @@
   font-weight: bold;
   z-index: 10;
 }
+
+.calculation-line {
+  text-align: center;
+}
   </style>
 </head>
 <body>
@@ -364,7 +368,7 @@
         const groups = Math.ceil(learners / 25);
         const sessions = groups * episodes;
         sessionInfo.style.display = "block";
-        sessionDetails.innerHTML = `<p><strong>Calculation:</strong> ${learners} learners ÷ 25 pax = ${groups} group(s) × ${episodes} sessions = <strong>${sessions} sessions</strong></p>`;
+        sessionDetails.innerHTML = `<p class="calculation-line"><strong>Calculation:</strong> ${learners} learners ÷ 25 pax = ${groups} group(s) × 5 sessions = <strong>${sessions} sessions</strong></p>`;
       } else {
         sessionInfo.style.display = "none";
         sessionDetails.innerHTML = "";
