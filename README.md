@@ -268,11 +268,22 @@
   </style>
 </head>
 <body>
-  <div class="container">
+   <div class="container">
     <div class="calculator">
       <h1>Estimated Programme Rollout Cost Calculator</h1>
+
+      <!-- Programme selection dropdown -->
+      <label for="programme">Select the Training Programme:</label>
+      <select id="programme" onchange="toggleProgramme()" required>
+        <option value="" disabled selected hidden>Please select a programme</option>
+        <option value="theline">The Line: Sexual Harassment</option>
+        <option value="chapter1">The Inclusion Challenge: Chapter 1</option>
+        <option value="chapter2">The Inclusion Challenge: Chapter 2</option>
+      </select>
+
       <label for="learners">Number of Employees to be Trained:</label>
       <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number" />
+
       <label for="engagement">Rollout Options:</label>
       <select id="engagement" onchange="toggleEngagementOptions()" required>
         <option value="" disabled selected hidden>Please select a rollout option</option>
@@ -282,15 +293,18 @@
         <option value="external_virtual">Dedicated Sessions - RTTM Facilitator: Virtual (60 min) - R3,500/session</option>
         <option value="external_inperson">Dedicated Sessions - RTTM Facilitator: In-person (60 min) - R4,500/session</option>
       </select>
+
       <div id="sessionInfo" style="display:none;">
-        <em>We recommend group sizes of 25 people to allow for better engagement. Each group would attend 5 sessions, 1 per episode of the programme.</em>
+        <em>We recommend group sizes of 25 people to allow for better engagement. Each group would attend sessions based on the selected programme.</em>
         <div id="sessionDetails"></div>
       </div>
+
       <label>Optional Extras:</label>
       <div class="checkboxes">
         <label><input type="checkbox" id="kickoff" /> Kick-off Session - Virtual (45 min) - R15,000</label>
         <label><input type="checkbox" id="wrapup" /> Wrap-up Session - Virtual (60 min) - R17,500</label>
       </div>
+
       <button onclick="calculateTotal()">Calculate</button>
     </div>
 
@@ -318,46 +332,59 @@
   </div>
 
   <script>
+    function toggleProgramme() {
+      toggleEngagementOptions();
+    }
+
     function toggleEngagementOptions() {
       const learners = parseInt(document.getElementById("learners").value) || 0;
       const engagement = document.getElementById("engagement").value;
+      const programme = document.getElementById("programme").value;
       const sessionInfo = document.getElementById("sessionInfo");
       const sessionDetails = document.getElementById("sessionDetails");
 
+      const episodes = programme === "chapter1" ? 7 : programme === "chapter2" ? 5 : 5;
+
       if (engagement.startsWith("external") && learners > 0) {
         const groups = Math.ceil(learners / 25);
-        const sessions = groups * 5;
+        const sessions = groups * episodes;
         sessionInfo.style.display = "block";
-        sessionDetails.innerHTML = `<p><strong>Calculation:</strong> ${learners} learners ÷ 25 pax = ${groups} group(s) × 5 sessions = <strong>${sessions} sessions</strong></p>`;
+        sessionDetails.innerHTML = `<p><strong>Calculation:</strong> ${learners} learners ÷ 25 pax = ${groups} group(s) × ${episodes} sessions = <strong>${sessions} sessions</strong></p>`;
       } else {
         sessionInfo.style.display = "none";
         sessionDetails.innerHTML = "";
       }
     }
 
-    function getContentCost(learners) {
-      let rate = 450;
-      if (learners > 5000) rate = 300;
-      else if (learners > 4000) rate = 330;
-      else if (learners > 3000) rate = 360;
-      else if (learners > 2000) rate = 390;
-      else if (learners > 1000) rate = 420;
+    function getContentCost(learners, programme) {
+      let rate = 450, cap = 3500000;
+      if (programme === "chapter1" || programme === "chapter2") {
+        cap = 2000000;
+        if (learners > 5000) rate = 300;
+        else if (learners > 4000) rate = 375;
+        else if (learners > 3000) rate = 400;
+        else if (learners > 2000) rate = 425;
+        else if (learners > 1000) rate = 450;
+        else rate = 500;
+      }
       const total = learners * rate;
-      return Math.min(total, 3500000);
+      return Math.min(total, cap);
     }
 
     function calculateTotal() {
       const learners = parseInt(document.getElementById("learners").value) || 0;
       const engagement = document.getElementById("engagement").value;
+      const programme = document.getElementById("programme").value;
       const kickoff = document.getElementById("kickoff").checked;
       const wrapup = document.getElementById("wrapup").checked;
 
-      const contentCost = getContentCost(learners);
+      const contentCost = getContentCost(learners, programme);
 
       let engagementCost = 0;
       if (engagement.startsWith("external")) {
+        const episodes = programme === "chapter1" ? 7 : programme === "chapter2" ? 5 : 5;
         const groups = Math.ceil(learners / 25);
-        const sessions = groups * 5;
+        const sessions = groups * episodes;
         const rate = engagement === "external_virtual" ? 3500 : 4500;
         engagementCost = sessions * rate;
       }
