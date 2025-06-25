@@ -165,12 +165,12 @@ button {
   margin-top: 0.5rem;
   display: none;
   flex-direction: column;
-  gap: 0.1rem;
+  gap: 0.05rem !important;
 }
 .results-buttons button {
   border-radius: 20px;
   padding: 0.4rem 0.8rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   text-align: left;
