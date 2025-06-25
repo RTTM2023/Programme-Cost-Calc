@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,34 +7,44 @@
     body {
       background-color: #F1ECEC;
       font-family: 'Montserrat', sans-serif;
-      display: flex;
-      justify-content: center;
-      padding: 3rem;
+      padding: 2rem;
+      margin: 0;
     }
     .container {
       display: flex;
-      gap: 2rem;
-      align-items: flex-start;
-      width: 1280px;
+      flex-direction: column;
+      align-items: center;
+      max-width: 100%;
       margin: 0 auto;
+      gap: 2rem;
+    }
+    @media (min-width: 1024px) {
+      .container {
+        flex-direction: row;
+        justify-content: center;
+        max-width: 1280px;
+      }
     }
     .calculator {
       background-color: #ffffff;
       border: 2px solid #F75C36;
       border-radius: 20px;
       padding: 2rem;
-      width: 700px;
-      flex-shrink: 0;
+      width: 100%;
+      max-width: 700px;
+      box-sizing: border-box;
     }
     .results-box {
       background-color: #F75D36;
       border-radius: 25px;
       padding: 2rem;
       color: white;
-      width: 450px;
+      width: 100%;
+      max-width: 450px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      box-sizing: border-box;
     }
     h1 {
       font-family: 'Montserrat', sans-serif;
@@ -181,12 +190,14 @@
       background-color: rgba(0, 0, 0, 0.5);
       justify-content: center;
       align-items: center;
+      z-index: 1000;
     }
     .form-content {
       background: white;
       padding: 2rem;
       border-radius: 20px;
-      width: 400px;
+      width: 90%;
+      max-width: 400px;
       font-family: 'Montserrat', sans-serif;
     }
     .form-content h3 {
