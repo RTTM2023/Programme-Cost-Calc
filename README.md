@@ -42,7 +42,7 @@ body {
       border-radius: 25px;
       padding: 2rem;
       color: white;
-      width: 425px;
+      width: 500px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
