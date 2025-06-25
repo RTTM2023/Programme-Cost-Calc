@@ -18,7 +18,7 @@ body {
   flex-direction: column;
   align-items: flex-start; /* align both boxes at the top */
   width: 100%;
-  max-width: 1350px;
+  max-width: 1600px;
   margin: 0 auto;
   gap: 2rem;
   box-sizing: border-box;
