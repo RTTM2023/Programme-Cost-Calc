@@ -8,7 +8,7 @@
 body {
   background-color: #F1ECEC;
   font-family: 'Montserrat', sans-serif;
-  padding: 1rem 0.5rem;
+  padding: 2rem 1rem 2rem 0.5rem; /* top, right, bottom, left */
   margin: 0;
   overflow-x: hidden; /* prevents horizontal scroll */
 }
