@@ -268,13 +268,19 @@
 
 .close-form {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.5rem;
+  top: -10px;
+  right: -10px;
+  font-size: 1.2rem;
   cursor: pointer;
-  background: none;
-  border: none;
+  background: white;
+  border-radius: 50%;
+  border: 1px solid #f05824;
   color: #f05824;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
 }
   </style>
