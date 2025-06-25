@@ -236,7 +236,7 @@ button {
       <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number" />
       <label for="engagement">Rollout Options:</label>
       <select id="engagement" onchange="toggleEngagementOptions()" required>
-        <option value="" disabled selected hidden>Please select a rollout option from the dropdown below</option>
+        <option value="" disabled selected hidden>Please select a rollout option</option>
         <option value="elearning">Standard eLearning - No Engagement (Free)</option>
         <option value="team">Team Meeting Discussion (Free)</option>
         <option value="internal">Dedicated Sessions - Internal Facilitator (Free)</option>
