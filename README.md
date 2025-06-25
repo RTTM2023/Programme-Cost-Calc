@@ -314,5 +314,13 @@ resultsHTML += `<p class="results-note">We use this estimated pricing as a guide
 
     document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
   </script>
+      function showFormWithSummary() {
+      const summary = document.getElementById("resultsContent").innerText;
+      document.getElementById("costSummary").value = summary;
+      document.getElementById("formModal").style.display = "flex";
+    }
+
+    document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
+  </script>
 </body>
 </html>
