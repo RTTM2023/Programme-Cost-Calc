@@ -276,9 +276,9 @@
       <label for="programme">Select the Training Programme:</label>
       <select id="programme" onchange="toggleProgramme()" required>
         <option value="" disabled selected hidden>Please select a programme</option>
-        <option value="theline">The Line: Sexual Harassment</option>
-        <option value="chapter1">The Inclusion Challenge: Chapter 1 (DEIB)</option>
-        <option value="chapter2">The Inclusion Challenge: Chapter 2 (DEIB)</option>
+        <option value="theline">The Line (Sexual Harassment)</option>
+        <option value="chapter1">The Inclusion Challenge, Chapter 1 (DEIB)</option>
+        <option value="chapter2">The Inclusion Challenge, Chapter 2 (DEIB)</option>
       </select>
 
       <label for="learners">Number of Employees to be Trained:</label>
