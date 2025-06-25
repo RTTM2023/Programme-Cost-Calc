@@ -182,7 +182,7 @@ text-align: center;
   margin-bottom: 1rem;
 }
 .results-note {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   margin-top: 1rem;
   font-family: 'Montserrat', sans-serif;
 }
