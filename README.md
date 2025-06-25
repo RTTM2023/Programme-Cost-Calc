@@ -236,7 +236,7 @@
         const groups = Math.ceil(learners / 25);
         const sessions = groups * 5;
         sessionInfo.style.display = "block";
-        sessionDetails.innerHTML = `<p><strong>Calculation:</strong> ${learners} learners ÷ 25 pax = ${groups} group(s) × 5 sessions = <strong>${sessions} sessions</strong></p>`;
+        sessionDetails.innerHTML = <p><strong>Calculation:</strong> ${learners} learners ÷ 25 pax = ${groups} group(s) × 5 sessions = <strong>${sessions} sessions</strong></p>;
       } else {
         sessionInfo.style.display = "none";
         sessionDetails.innerHTML = "";
@@ -271,26 +271,26 @@
       }
 
       let resultsHTML = '';
-      resultsHTML += `<div class='results-line-item'><span>Content Cost:</span><span>R${contentCost.toLocaleString()}</span></div>`;
+      resultsHTML += <div class='results-line-item'><span>Content Cost:</span><span>R${contentCost.toLocaleString()}</span></div>;
 
       if (engagementCost > 0) {
-        resultsHTML += `<div class='results-line-item'><span>Engagement Session:</span><span>R${engagementCost.toLocaleString()}</span></div>`;
+        resultsHTML += <div class='results-line-item'><span>Engagement Session:</span><span>R${engagementCost.toLocaleString()}</span></div>;
       }
 
       if (kickoff) {
-        resultsHTML += `<div class='results-line-item'><span>Kick-off</span><span>R15,000</span></div>`;
+        resultsHTML += <div class='results-line-item'><span>Kick-off</span><span>R15,000</span></div>;
       }
       if (wrapup) {
-        resultsHTML += `<div class='results-line-item'><span>Wrap-up</span><span>R17,500</span></div>`;
+        resultsHTML += <div class='results-line-item'><span>Wrap-up</span><span>R17,500</span></div>;
       }
 
       const extrasCost = (kickoff ? 15000 : 0) + (wrapup ? 17500 : 0);
       const totalCost = contentCost + engagementCost + extrasCost;
 
-resultsHTML += `<div class="line"></div>`;
-resultsHTML += `<div class='total-line'><span>Total Estimated Cost</span><span>R${totalCost.toLocaleString()}</span></div>`;
-resultsHTML += `<div class="line"></div>`;
-resultsHTML += `<p class="results-note">We use this estimated pricing as a guideline for clients. This is not indicative of the final price charged, given negotiations on budget, as well as using different rollout options within a single rollout project.</p>`;
+resultsHTML += <div class="line"></div>;
+resultsHTML += <div class='total-line'><span>Total Estimated Cost</span><span>R${totalCost.toLocaleString()}</span></div>;
+resultsHTML += <div class="line"></div>;
+resultsHTML += <p class="results-note">We use this estimated pricing as a guideline for clients. This is not indicative of the final price charged, given negotiations on budget, as well as using different rollout options within a single rollout project.</p>;
 
       document.getElementById("resultsContent").innerHTML = resultsHTML;
       document.getElementById("resultsButtons").style.display = "flex";
