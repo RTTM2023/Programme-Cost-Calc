@@ -5,27 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Estimated Programme Rollout Cost Calculator</title>
   <style>
-    body {
-      background-color: #F1ECEC;
-      font-family: 'Montserrat', sans-serif;
-      padding: 2rem;
-      margin: 0;
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      margin: 0 auto;
-      gap: 2rem;
-    }
-    @media (min-width: 1024px) {
-      .container {
-        flex-direction: row;
-        justify-content: center;
-        width: 1280px;
-      }
-    }
+body {
+  background-color: #F1ECEC;
+  font-family: 'Montserrat', sans-serif;
+  padding: 1rem 0.5rem;
+  margin: 0;
+  overflow-x: hidden; /* prevents horizontal scroll */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1350px; /* bump this up to fit both boxes comfortably */
+  margin: 0 auto;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+@media (min-width: 1024px) {
+  .container {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
     .calculator {
       background-color: #ffffff;
       border: 2px solid #F75C36;
