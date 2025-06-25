@@ -61,7 +61,7 @@ h1 {
 .results-box h2 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
   text-align: left;
   margin-bottom: 1rem;
 }
@@ -129,7 +129,7 @@ button {
   text-align: center;
 }
 .results-line-item {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: space-between;
@@ -146,7 +146,7 @@ button {
   margin: 1rem 0;
 }
 .total-line {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
