@@ -8,7 +8,7 @@
 body {
   background-color: #F1ECEC;
   font-family: 'Montserrat', sans-serif;
-  padding: 2rem 1rem; /* reduced right and left padding */
+  padding: 2rem 0; /* no left/right padding */
   margin: 0;
   overflow-x: hidden;
 }
