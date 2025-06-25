@@ -318,9 +318,9 @@
     </div>
   </div>
 
-  <div class="form-modal" id="formModal">
-    <span onclick="closeForm()" style="position:absolute; top:20px; right:25px; font-size:1.5rem; color:white; cursor:pointer;">&times;</span>
-    <div class="form-content">
+<div class="form-modal" id="formModal">
+  <span onclick="closeForm()" style="position:absolute; top:20px; right:25px; font-size:1.5rem; color:white; cursor:pointer;">&times;</span>
+  <div class="form-content">
       <h3>Submit Your Interest</h3>
       <form method="POST" action="https://formspree.io/f/movwpwek">
         <input type="text" name="name" placeholder="Your Name" required />
