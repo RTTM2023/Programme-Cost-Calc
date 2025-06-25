@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,7 +7,7 @@
 body {
   background-color: #F1ECEC;
   font-family: 'Montserrat', sans-serif;
-  padding: 2rem 0.5rem; /* top/bottom: 2rem, left/right: 0.5rem */
+  padding: 2rem 0.25rem; /* reduced horizontal padding */
   margin: 0;
   overflow-x: hidden;
 }
@@ -16,18 +15,20 @@ body {
 .container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* align both boxes at the top */
+  align-items: flex-start;
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
   gap: 2rem;
   box-sizing: border-box;
+  padding-left: 0.25rem; /* reduced internal container spacing */
+  padding-right: 0.25rem;
 }
 @media (min-width: 1024px) {
   .container {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start; /* ensure top alignment */
+    align-items: flex-start;
   }
 }
 .calculator {
@@ -55,7 +56,7 @@ h1 {
   font-size: 33px;
   text-align: center;
   margin-bottom: 1rem;
-  display: none; /* hide The-Line-Cost heading */
+  display: none;
 }
 .results-box h2 {
   font-family: 'Montserrat', sans-serif;
