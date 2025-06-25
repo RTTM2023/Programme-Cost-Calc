@@ -237,11 +237,11 @@ button {
       <label for="engagement">Rollout Options:</label>
       <select id="engagement" onchange="toggleEngagementOptions()" required>
         <option value="" disabled selected hidden>Please select a rollout option from the dropdown below</option>
-        <option value="elearning">Standard eLearning (Free)</option>
-        <option value="team">Team Meeting Rollout (Free)</option>
-        <option value="internal">Dedicated Sessions - Internal Facilitation (Free)</option>
-        <option value="external_virtual">Dedicated Sessions - RTTM Facilitation: Virtual (60 min) - R3,500/session</option>
-        <option value="external_inperson">Dedicated Sessions - RTTM Facilitation: In-person (60 min) - R4,500/session</option>
+        <option value="elearning">Standard eLearning - No Engagement (Free)</option>
+        <option value="team">Team Meeting Discussion (Free)</option>
+        <option value="internal">Dedicated Sessions - Internal Facilitator (Free)</option>
+        <option value="external_virtual">Dedicated Sessions - RTTM Facilitator: Virtual (60 min) - R3,500/session</option>
+        <option value="external_inperson">Dedicated Sessions - RTTM Facilitator: In-person (60 min) - R4,500/session</option>
       </select>
       <div id="sessionInfo" style="display:none;">
         <em>We recommend group sizes of 25 people to allow for better engagement. Each group would attend 5 sessions, 1 per episode of the programme.</em>
@@ -343,7 +343,7 @@ button {
       resultsHTML += `<div class="line"></div>`;
       resultsHTML += `<div class='total-line'><span>Total Estimated Cost</span><span>R${totalCost.toLocaleString()}</span></div>`;
       resultsHTML += `<div class="line"></div>`;
-      resultsHTML += `<p class="results-note">We use this estimated pricing as a guideline for clients. This is not indicative of the final price charged, given negotiations on budget, as well as using different rollout options within a single rollout project.</p>`;
+      resultsHTML += `<p class="results-note">This estimated pricing is intended as a guideline only. Final costs may vary based on budget negotiations and the use of different rollout options within the same project.</p>`;
 
       document.getElementById("resultsContent").innerHTML = resultsHTML;
       document.getElementById("resultsButtons").style.display = "flex";
