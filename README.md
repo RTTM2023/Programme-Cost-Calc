@@ -34,7 +34,7 @@ body {
       border: 2px solid #F75C36;
       border-radius: 20px;
       padding: 2rem;
-      width: 700px;
+      width: 760px;
       box-sizing: border-box;
     }
     .results-box {
