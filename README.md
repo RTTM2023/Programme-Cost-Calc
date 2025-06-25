@@ -415,11 +415,19 @@
       document.getElementById("resultsButtons").style.display = "flex";
     }
 
-    function showFormWithSummary() {
-      const summary = document.getElementById("resultsContent").innerText;
-      document.getElementById("costSummary").value = summary;
-      document.getElementById("formModal").style.display = "flex";
-    }
+function showFormWithSummary() {
+  const programmeName = document.getElementById("programme").options[document.getElementById("programme").selectedIndex].text;
+  const totalHeadcount = document.getElementById("learners").value;
+  const summaryText = document.getElementById("resultsContent").innerText;
+
+  const formattedSummary = 
+    `Programme: ${programmeName}\n` +
+    `Total Headcount: ${totalHeadcount}\n\n` +
+    summaryText.replace("This estimated pricing is intended as a guideline only. Final costs may vary based on budget negotiations and the use of different rollout options within the same project.", "");
+
+  document.getElementById("costSummary").value = formattedSummary.trim();
+  document.getElementById("formModal").style.display = "flex";
+}
 
     document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
   </script>
