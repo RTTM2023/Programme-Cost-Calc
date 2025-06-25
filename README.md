@@ -333,7 +333,6 @@
 
 <div class="form-modal" id="formModal">
 <div class="form-content">
-  <button class="close-form" onclick="document.getElementById('formModal').style.display = 'none';">&times;</button>
   <h3>Submit Your Interest</h3>
   <form method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
     <input type="text" name="name" placeholder="Your Name" required />
@@ -443,6 +442,12 @@ function showFormWithSummary() {
 }
 
     document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
+  document.getElementById("formModal").addEventListener("click", function (event) {
+    const formContent = document.querySelector(".form-content");
+    if (!formContent.contains(event.target)) {
+      this.style.display = "none";
+    }
+  });
   </script>
 </body>
 </html>
