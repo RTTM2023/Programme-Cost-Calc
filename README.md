@@ -268,21 +268,36 @@
   </style>
 </head>
 <body>
-  <div class="container">
+   <div class="container">
     <div class="calculator">
       <h1>Estimated Programme Rollout Cost Calculator</h1>
+
+      <!-- Programme selection dropdown -->
       <label for="programme">Select the Training Programme:</label>
       <select id="programme" onchange="toggleProgramme()" required>
-        <option value="" disabled selected hidden>Please select a programme</option>
-        <option value="theline">The Line: Sexual Harassment</option>
-        <option value="chapter1">The Inclusion Challenge: Chapter 1</option>
-        <option value="chapter2">The Inclusion Challenge: Chapter 2</option>
+        <option value="" disabled selected hidden>Please select a training programme.</option>
+        <option value="theline">The Line (Sexual Harassment)</option>
+        <option value="chapter1">The Inclusion Challenge, Chapter 1 (DEIB)</option>
+        <option value="chapter2">The Inclusion Challenge, Chapter 2 (DEIB)</option>
       </select>
 
       <label for="learners">Number of Employees to be Trained:</label>
-      <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number" />
+      <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number." />
 
-      <div id="rolloutContainer"></div>
+      <label for="engagement">Rollout Options:</label>
+      <select id="engagement" onchange="toggleEngagementOptions()" required>
+        <option value="" disabled selected hidden>Please select a rollout option.</option>
+        <option value="elearning">Standard eLearning - No Engagement (No extra cost)</option>
+        <option value="team">Team Meeting Discussion (No extra cost)</option>
+        <option value="internal">Dedicated Sessions - Internal Facilitator (No extra cost)</option>
+        <option value="external_virtual">Dedicated Sessions - RTTM Facilitator: Virtual (60 min) - R3,500/session</option>
+        <option value="external_inperson">Dedicated Sessions - RTTM Facilitator: In-person (60 min) - R4,500/session</option>
+      </select>
+
+      <div id="sessionInfo" style="display:none;">
+        <em>We recommend group sizes of 25 people to allow for better engagement. Each group would attend sessions based on the selected programme.</em>
+        <div id="sessionDetails"></div>
+      </div>
 
       <label>Optional Extras:</label>
       <div class="checkboxes">
@@ -317,39 +332,27 @@
   </div>
 
   <script>
-    const rolloutOptions = [
-      { value: "elearning", label: "Standard eLearning - No Engagement (Free)", cost: 0 },
-      { value: "team", label: "Team Meeting Discussion (Free)", cost: 0 },
-      { value: "internal", label: "Dedicated Sessions - Internal Facilitator (Free)", cost: 0 },
-      { value: "external_virtual", label: "Dedicated Sessions - RTTM Facilitator: Virtual (60 min) - R3,500/session", cost: 3500 },
-      { value: "external_inperson", label: "Dedicated Sessions - RTTM Facilitator: In-person (60 min) - R4,500/session", cost: 4500 },
-    ];
-
     function toggleProgramme() {
-      generateRolloutBlocks();
+      toggleEngagementOptions();
     }
 
-    function generateRolloutBlocks() {
-      const container = document.getElementById("rolloutContainer");
-      container.innerHTML = "";
-      rolloutOptions.forEach((option, index) => {
-        const block = document.createElement("div");
-        block.innerHTML = `
-          <label>${option.label}</label>
-          <input type="number" class="rollout-count" data-option="${option.value}" placeholder="Number of employees for this option" />
-          <label><input type="checkbox" class="rollout-all" data-option="${option.value}" onchange="handleAllCheckbox(this)" /> All</label>
-        `;
-        container.appendChild(block);
-      });
-    }
-
-    function handleAllCheckbox(checkbox) {
+    function toggleEngagementOptions() {
       const learners = parseInt(document.getElementById("learners").value) || 0;
-      const allInputs = document.querySelectorAll(`.rollout-count[data-option='${checkbox.dataset.option}']`);
-      if (checkbox.checked) {
-        allInputs.forEach(input => input.value = learners);
-        document.querySelectorAll(`.rollout-count:not([data-option='${checkbox.dataset.option}'])`).forEach(i => i.value = 0);
-        document.querySelectorAll(`.rollout-all:not([data-option='${checkbox.dataset.option}'])`).forEach(cb => cb.checked = false);
+      const engagement = document.getElementById("engagement").value;
+      const programme = document.getElementById("programme").value;
+      const sessionInfo = document.getElementById("sessionInfo");
+      const sessionDetails = document.getElementById("sessionDetails");
+
+      const episodes = programme === "chapter1" ? 7 : programme === "chapter2" ? 5 : 5;
+
+      if (engagement.startsWith("external") && learners > 0) {
+        const groups = Math.ceil(learners / 25);
+        const sessions = groups * episodes;
+        sessionInfo.style.display = "block";
+        sessionDetails.innerHTML = `<p><strong>Calculation:</strong> ${learners} learners ÷ 25 pax = ${groups} group(s) × ${episodes} sessions = <strong>${sessions} sessions</strong></p>`;
+      } else {
+        sessionInfo.style.display = "none";
+        sessionDetails.innerHTML = "";
       }
     }
 
@@ -369,41 +372,39 @@
     }
 
     function calculateTotal() {
+      const learners = parseInt(document.getElementById("learners").value) || 0;
+      const engagement = document.getElementById("engagement").value;
       const programme = document.getElementById("programme").value;
       const kickoff = document.getElementById("kickoff").checked;
       const wrapup = document.getElementById("wrapup").checked;
-      const learners = parseInt(document.getElementById("learners").value) || 0;
-
-      let totalAssigned = 0;
-      let engagementCost = 0;
-      let summaryLines = [];
-
-      rolloutOptions.forEach(option => {
-        const input = document.querySelector(`.rollout-count[data-option='${option.value}']`);
-        const count = parseInt(input.value) || 0;
-        totalAssigned += count;
-
-        if (option.cost > 0 && count > 0) {
-          const episodes = programme === "chapter1" ? 7 : programme === "chapter2" ? 5 : 5;
-          const groups = Math.ceil(count / 25);
-          const sessions = groups * episodes;
-          const cost = sessions * option.cost;
-          engagementCost += cost;
-          summaryLines.push(`<div class='results-line-item'><span>${option.label}</span><span>R${cost.toLocaleString()}</span></div>`);
-        } else if (count > 0) {
-          summaryLines.push(`<div class='results-line-item'><span>${option.label}</span><span>Free</span></div>`);
-        }
-      });
 
       const contentCost = getContentCost(learners, programme);
+
+      let engagementCost = 0;
+      if (engagement.startsWith("external")) {
+        const episodes = programme === "chapter1" ? 7 : programme === "chapter2" ? 5 : 5;
+        const groups = Math.ceil(learners / 25);
+        const sessions = groups * episodes;
+        const rate = engagement === "external_virtual" ? 3500 : 4500;
+        engagementCost = sessions * rate;
+      }
+
+      let resultsHTML = '';
+      resultsHTML += `<div class='results-line-item'><span>Content Cost:</span><span>R${contentCost.toLocaleString()}</span></div>`;
+
+      if (engagementCost > 0) {
+        resultsHTML += `<div class='results-line-item'><span>Facilitation Cost:</span><span>R${engagementCost.toLocaleString()}</span></div>`;
+      }
+
+      if (kickoff) {
+        resultsHTML += `<div class='results-line-item'><span>Kick-off</span><span>R15,000</span></div>`;
+      }
+      if (wrapup) {
+        resultsHTML += `<div class='results-line-item'><span>Wrap-up</span><span>R17,500</span></div>`;
+      }
+
       const extrasCost = (kickoff ? 15000 : 0) + (wrapup ? 17500 : 0);
       const totalCost = contentCost + engagementCost + extrasCost;
-
-      let resultsHTML = `<div class='results-line-item'><span>Content Cost:</span><span>R${contentCost.toLocaleString()}</span></div>`;
-      summaryLines.forEach(line => resultsHTML += line);
-
-      if (kickoff) resultsHTML += `<div class='results-line-item'><span>Kick-off</span><span>R15,000</span></div>`;
-      if (wrapup) resultsHTML += `<div class='results-line-item'><span>Wrap-up</span><span>R17,500</span></div>`;
 
       resultsHTML += `<div class="line"></div>`;
       resultsHTML += `<div class='total-line'><span>Total Estimated Cost</span><span>R${totalCost.toLocaleString()}</span></div>`;
