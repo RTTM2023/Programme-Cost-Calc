@@ -5,7 +5,7 @@
   <title>Estimated Programme Rollout Cost Calculator</title>
   <style>
     body {
-      background-color: #F1ECEC;
+      background-color: transparent;
       font-family: 'Montserrat', sans-serif;
       padding: 2rem 0.25rem;
       margin: 0;
