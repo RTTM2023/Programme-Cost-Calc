@@ -393,7 +393,7 @@
       resultsHTML += `<div class='results-line-item'><span>Content Cost:</span><span>R${contentCost.toLocaleString()}</span></div>`;
 
       if (engagementCost > 0) {
-        resultsHTML += `<div class='results-line-item'><span>Engagement Session:</span><span>R${engagementCost.toLocaleString()}</span></div>`;
+        resultsHTML += `<div class='results-line-item'><span>Facilitation Cost:</span><span>R${engagementCost.toLocaleString()}</span></div>`;
       }
 
       if (kickoff) {
