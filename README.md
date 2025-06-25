@@ -176,6 +176,7 @@ button {
   color: white;
 }
 #sessionInfo em {
+text-align: center;
   display: block;
   margin-top: 1rem;
   margin-bottom: 1rem;
