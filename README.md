@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -10,10 +11,6 @@
       padding: 2rem;
       margin: 0;
     }
-    .toggle-mode {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
     .container {
       display: flex;
       flex-direction: column;
@@ -23,7 +20,7 @@
       gap: 2rem;
     }
     @media (min-width: 1024px) {
-      body.desktop .container {
+      .container {
         flex-direction: row;
         justify-content: center;
         max-width: 1280px;
@@ -227,11 +224,7 @@
     }
   </style>
 </head>
-<body class="desktop">
-  <div class="toggle-mode">
-    <button onclick="toggleLayout()">Toggle Mobile/Desktop Preview</button>
-  </div>
-  <div class="container">
+<body>
   <div class="container">
     <div class="calculator">
       <h1>Estimated Programme Rollout Cost Calculator</h1>
@@ -343,11 +336,5 @@
       document.getElementById("formModal").style.display = "flex";
     }
     document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
-  </script>
-    function toggleLayout() {
-      const body = document.body;
-      body.classList.toggle('desktop');
-    }
-  </script>
 </body>
 </html>
