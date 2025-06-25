@@ -256,27 +256,27 @@
       border-radius: 10px;
     }
 
-    .form-content button {
-      background: #F75D36;
-      color: white;
-      border: none;
-      padding: 0.6rem 1rem;
-      border-radius: 10px;
-      font-family: 'Montserrat', sans-serif;
-      cursor: pointer;
-    }
+.form-content button[type="submit"] {
+  background: #F75D36;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
 
-    .close-form {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      background: none;
-      border: none;
-      color: #f05824;
-      font-weight: bold;
-    }
+.close-form {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #f05824;
+  font-weight: bold;
+}
   </style>
 </head>
 <body>
