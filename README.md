@@ -35,7 +35,7 @@ body {
   border: 2px solid #F75C36;
   border-radius: 20px;
   padding: 2rem;
-  width: 850px;
+  width: 1000px;
   box-sizing: border-box;
 }
 .results-box {
@@ -43,7 +43,7 @@ body {
   border-radius: 25px;
   padding: 2rem;
   color: white;
-  width: 500px;
+  width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
