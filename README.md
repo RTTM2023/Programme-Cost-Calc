@@ -165,7 +165,7 @@ button {
   margin-top: 0.5rem;
   display: none;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.1rem;
 }
 .results-buttons button {
   border-radius: 20px;
