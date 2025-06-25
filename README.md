@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -15,7 +14,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      max-width: 100%;
+      width: 100%;
       margin: 0 auto;
       gap: 2rem;
     }
@@ -23,26 +22,23 @@
       .container {
         flex-direction: row;
         justify-content: center;
-        max-width: 1280px;
+        width: 1280px;
       }
     }
-.calculator {
-  background-color: #ffffff;
-  border: 2px solid #F75C36;
-  border-radius: 20px;
-  padding: 2rem;
-  width: 100%;
-  max-width: 800px; /* was 700px */
-  min-width: 700px;  /* prevent it from shrinking too much */
-  box-sizing: border-box;
-}
+    .calculator {
+      background-color: #ffffff;
+      border: 2px solid #F75C36;
+      border-radius: 20px;
+      padding: 2rem;
+      width: 700px;
+      box-sizing: border-box;
+    }
     .results-box {
       background-color: #F75D36;
       border-radius: 25px;
       padding: 2rem;
       color: white;
-      width: 100%;
-      max-width: 450px;
+      width: 450px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -85,12 +81,12 @@
       padding-right: 2.5rem;
     }
     input[type="number"]::placeholder {
-      color: #CFCFCF !important;
+      color: #a6a6a6 !important;
       font-style: italic;
       font-family: 'Montserrat', sans-serif;
     }
     select:invalid {
-      color: #CFCFCF !important;
+      color: #a6a6a6 !important;
       font-style: italic;
       font-family: 'Montserrat', sans-serif;
     }
