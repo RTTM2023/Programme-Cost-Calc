@@ -26,15 +26,16 @@
         max-width: 1280px;
       }
     }
-    .calculator {
-      background-color: #ffffff;
-      border: 2px solid #F75C36;
-      border-radius: 20px;
-      padding: 2rem;
-      width: 100%;
-      max-width: 700px;
-      box-sizing: border-box;
-    }
+.calculator {
+  background-color: #ffffff;
+  border: 2px solid #F75C36;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px; /* was 700px */
+  min-width: 700px;  /* prevent it from shrinking too much */
+  box-sizing: border-box;
+}
     .results-box {
       background-color: #F75D36;
       border-radius: 25px;
@@ -84,12 +85,12 @@
       padding-right: 2.5rem;
     }
     input[type="number"]::placeholder {
-      color: #a6a6a6 !important;
+      color: #CFCFCF !important;
       font-style: italic;
       font-family: 'Montserrat', sans-serif;
     }
     select:invalid {
-      color: #a6a6a6 !important;
+      color: #CFCFCF !important;
       font-style: italic;
       font-family: 'Montserrat', sans-serif;
     }
