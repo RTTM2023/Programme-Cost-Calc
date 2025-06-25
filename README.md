@@ -271,69 +271,87 @@ body {
     </div>
   </div>
   <script>
-    function toggleEngagementOptions() {
-      const learners = parseInt(document.getElementById("learners").value) || 0;
-      const engagement = document.getElementById("engagement").value;
-      const sessionInfo = document.getElementById("sessionInfo");
-      const sessionDetails = document.getElementById("sessionDetails");
-      if (engagement.startsWith("external") && learners > 0) {
-        const groups = Math.ceil(learners / 25);
-        const sessions = groups * 5;
-        sessionInfo.style.display = "block";
-        sessionDetails.innerHTML = `<p><strong>Calculation:</strong> ${learners} learners ÷ 25 pax = ${groups} group(s) × 5 sessions = <strong>${sessions} sessions</strong></p>`;
-      } else {
-        sessionInfo.style.display = "none";
-        sessionDetails.innerHTML = "";
-      }
+  function toggleEngagementOptions() {
+    const learners = parseInt(document.getElementById("learners").value) || 0;
+    const engagement = document.getElementById("engagement").value;
+    const sessionInfo = document.getElementById("sessionInfo");
+    const sessionDetails = document.getElementById("sessionDetails");
+
+    if (engagement.startsWith("external") && learners > 0) {
+      const groups = Math.ceil(learners / 25);
+      const sessions = groups * 5;
+      sessionInfo.style.display = "block";
+      sessionDetails.innerHTML = `<p><strong>Calculation:</strong> ${learners} learners ÷ 25 pax = ${groups} group(s) × 5 sessions = <strong>${sessions} sessions</strong></p>`;
+    } else {
+      sessionInfo.style.display = "none";
+      sessionDetails.innerHTML = "";
     }
-    function getContentCost(learners) {
-      let rate = 450;
-      if (learners > 5000) rate = 300;
-      else if (learners > 4000) rate = 330;
-      else if (learners > 3000) rate = 360;
-      else if (learners > 2000) rate = 390;
-      else if (learners > 1000) rate = 420;
-      const total = learners * rate;
-      return Math.min(total, 3500000);
+  }
+
+  function getContentCost(learners) {
+    let rate = 450;
+    if (learners > 5000) rate = 300;
+    else if (learners > 4000) rate = 330;
+    else if (learners > 3000) rate = 360;
+    else if (learners > 2000) rate = 390;
+    else if (learners > 1000) rate = 420;
+    const total = learners * rate;
+    return Math.min(total, 3500000);
+  }
+
+  function calculateTotal() {
+    const learners = parseInt(document.getElementById("learners").value) || 0;
+    const engagement = document.getElementById("engagement").value;
+    const kickoff = document.getElementById("kickoff").checked;
+    const wrapup = document.getElementById("wrapup").checked;
+
+    const contentCost = getContentCost(learners);
+
+    let engagementCost = 0;
+    if (engagement.startsWith("external")) {
+      const groups = Math.ceil(learners / 25);
+      const sessions = groups * 5;
+      const rate = engagement === "external_virtual" ? 3500 : 4500;
+      engagementCost = sessions * rate;
     }
-    function calculateTotal() {
-      const learners = parseInt(document.getElementById("learners").value) || 0;
-      const engagement = document.getElementById("engagement").value;
-      const kickoff = document.getElementById("kickoff").checked;
-      const wrapup = document.getElementById("wrapup").checked;
-      const contentCost = getContentCost(learners);
-      let engagementCost = 0;
-      if (engagement.startsWith("external")) {
-        const groups = Math.ceil(learners / 25);
-        const sessions = groups * 5;
-        const rate = engagement === "external_virtual" ? 3500 : 4500;
-        engagementCost = sessions * rate;
-      }
-      let resultsHTML = '';
-      resultsHTML += `<div class='results-line-item'><span>Content Cost:</span><span>R${contentCost.toLocaleString()}</span></div>`;
-      if (engagementCost > 0) {
-        resultsHTML += `<div class='results-line-item'><span>Engagement Session:</span><span>R${engagementCost.toLocaleString()}</span></div>`;
-      }
-      if (kickoff) {
-        resultsHTML += `<div class='results-line-item'><span>Kick-off</span><span>R15,000</span></div>`;
-      }
-      if (wrapup) {
-        resultsHTML += `<div class='results-line-item'><span>Wrap-up</span><span>R17,500</span></div>`;
-      }
-      const extrasCost = (kickoff ? 15000 : 0) + (wrapup ? 17500 : 0);
-      const totalCost = contentCost + engagementCost + extrasCost;
-      resultsHTML += `<div class="line"></div>`;
-      resultsHTML += `<div class='total-line'><span>Total Estimated Cost</span><span>R${totalCost.toLocaleString()}</span></div>`;
-      resultsHTML += `<div class="line"></div>`;
-      resultsHTML += `<p class="results-note">This estimated pricing is intended as a guideline only. Final costs may vary based on budget negotiations and the use of different rollout options within the same project.</p>`;
-      document.getElementById("resultsContent").innerHTML = resultsHTML;
-      document.getElementById("resultsButtons").style.display = "flex";
+
+    let resultsHTML = '';
+    resultsHTML += `<div class='results-line-item'><span>Content Cost:</span><span>R${contentCost.toLocaleString()}</span></div>`;
+
+    if (engagementCost > 0) {
+      resultsHTML += `<div class='results-line-item'><span>Engagement Session:</span><span>R${engagementCost.toLocaleString()}</span></div>`;
     }
-    function showFormWithSummary() {
-      const summary = document.getElementById("resultsContent").innerText;
-      document.getElementById("costSummary").value = summary;
-      document.getElementById("formModal").style.display = "flex";
+
+    if (kickoff) {
+      resultsHTML += `<div class='results-line-item'><span>Kick-off</span><span>R15,000</span></div>`;
     }
-    document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
+    if (wrapup) {
+      resultsHTML += `<div class='results-line-item'><span>Wrap-up</span><span>R17,500</span></div>`;
+    }
+
+    const extrasCost = (kickoff ? 15000 : 0) + (wrapup ? 17500 : 0);
+    const totalCost = contentCost + engagementCost + extrasCost;
+
+    resultsHTML += `<div class="line"></div>`;
+    resultsHTML += `<div class='total-line'><span>Total Estimated Cost</span><span>R${totalCost.toLocaleString()}</span></div>`;
+    resultsHTML += `<div class="line"></div>`;
+    resultsHTML += `<p class="results-note">We use this estimated pricing as a guideline for clients. This is not indicative of the final price charged, given negotiations on budget, as well as using different rollout options within a single rollout project.</p>`;
+
+    document.getElementById("resultsContent").innerHTML = resultsHTML;
+    document.getElementById("resultsButtons").style.display = "flex";
+  }
+
+  function showFormWithSummary() {
+    const summary = document.getElementById("resultsContent").innerText;
+    document.getElementById("costSummary").value = summary;
+    document.getElementById("formModal").style.display = "flex";
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const submitBtn = document.querySelector('.submit-btn');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', showFormWithSummary);
+    }
+  });
 </body>
 </html>
