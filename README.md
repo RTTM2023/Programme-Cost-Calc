@@ -264,20 +264,19 @@
       border-radius: 10px;
       font-family: 'Montserrat', sans-serif;
       cursor: pointer;
-      
     }
 
     .close-form {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #f05824;
-  font-weight: bold;
-}
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #f05824;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -332,18 +331,18 @@
   </div>
 
 <div class="form-modal" id="formModal">
-  <div class="form-content">
-    <button class="close-form" onclick="document.getElementById('formModal').style.display = 'none';">&times;</button>
-    <h3>Submit Your Interest</h3>
-    <form method="POST" action="https://formspree.io/f/movwpwek">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <input type="text" name="company" placeholder="Company Name" required />
-      <input type="text" name="programme" id="formProgramme" placeholder="Programme" readonly />
-      <input type="text" name="headcount" id="formHeadcount" placeholder="Total Headcount" readonly />
-      <textarea name="summary" id="costSummary" rows="6" readonly></textarea>
-      <button type="submit">Send</button>
-    </form>
+<div class="form-content">
+  <button class="close-form" onclick="document.getElementById('formModal').style.display = 'none';">&times;</button>
+  <h3>Submit Your Interest</h3>
+  <form method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <input type="text" name="company" placeholder="Company Name" required />
+    <input type="text" name="programme" id="formProgramme" placeholder="Programme" readonly />
+    <input type="text" name="headcount" id="formHeadcount" placeholder="Total Headcount" readonly />
+    <textarea name="summary" id="costSummary" rows="6" readonly></textarea>
+    <button type="submit">Send</button>
+  </form>
     </div>
   </div>
 
