@@ -319,7 +319,6 @@
   </div>
 
   <div class="form-modal" id="formModal">
-    <span onclick="closeForm()" style="position:absolute; top:20px; right:25px; font-size:1.5rem; color:white; cursor:pointer;">&times;</span>
     <div class="form-content">
       <h3>Submit Your Interest</h3>
       <form method="POST" action="https://formspree.io/f/movwpwek">
@@ -417,39 +416,20 @@
     }
 
 function showFormWithSummary() {
-  const programmeEl = document.getElementById("programme");
-  const programmeName = programmeEl.options[programmeEl.selectedIndex].text;
+  const programmeName = document.getElementById("programme").options[document.getElementById("programme").selectedIndex].text;
   const totalHeadcount = document.getElementById("learners").value;
   const summaryText = document.getElementById("resultsContent").innerText;
 
-  let rolloutSummary = "";
-  const programme = programmeEl.value;
-  const episodes = programme === "chapter1" ? 7 : programme === "chapter2" ? 5 : 5;
-
-  rolloutOptions.forEach(option => {
-    const input = document.querySelector(`.rollout-count[data-option='${option.value}']`);
-    const count = parseInt(input.value) || 0;
-    if (count > 0) {
-      rolloutSummary += `\n- ${option.label}: ${count} employee(s)`;
-      if (option.cost > 0) {
-        const groups = Math.ceil(count / 25);
-        rolloutSummary += ` (${groups} group(s))`;
-      }
-    }
-  });
-
   const formattedSummary = 
     `Programme: ${programmeName}\n` +
-    `Total Headcount: ${totalHeadcount}\n` +
-    `Rollout Options: ${rolloutSummary.trim()}\n\n` +
+    `Total Headcount: ${totalHeadcount}\n\n` +
     summaryText.replace("This estimated pricing is intended as a guideline only. Final costs may vary based on budget negotiations and the use of different rollout options within the same project.", "");
 
   document.getElementById("costSummary").value = formattedSummary.trim();
   document.getElementById("formModal").style.display = "flex";
 }
-    function closeForm() {
-  document.getElementById("formModal").style.display = "none";
-}
+
+    document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
   </script>
 </body>
 </html>
