@@ -318,16 +318,19 @@
     </div>
   </div>
 
-  <div class="form-modal" id="formModal">
-    <div class="form-content">
-      <h3>Submit Your Interest</h3>
-      <form method="POST" action="https://formspree.io/f/movwpwek">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <input type="text" name="company" placeholder="Company Name" required />
-        <textarea name="summary" id="costSummary" rows="6" readonly></textarea>
-        <button type="submit">Send</button>
-      </form>
+<div class="form-modal" id="formModal">
+  <div class="form-content">
+    <button class="close-form" onclick="document.getElementById('formModal').style.display = 'none';">&times;</button>
+    <h3>Submit Your Interest</h3>
+    <form method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <input type="text" name="company" placeholder="Company Name" required />
+      <input type="text" name="programme" id="formProgramme" placeholder="Programme" readonly />
+      <input type="text" name="headcount" id="formHeadcount" placeholder="Total Headcount" readonly />
+      <textarea name="summary" id="costSummary" rows="6" readonly></textarea>
+      <button type="submit">Send</button>
+    </form>
     </div>
   </div>
 
@@ -416,16 +419,13 @@
     }
 
 function showFormWithSummary() {
-  const programmeName = document.getElementById("programme").options[document.getElementById("programme").selectedIndex].text;
-  const totalHeadcount = document.getElementById("learners").value;
-  const summaryText = document.getElementById("resultsContent").innerText;
+  const summary = document.getElementById("resultsContent").innerText;
+  const programme = document.getElementById("programme").options[document.getElementById("programme").selectedIndex].text;
+  const headcount = document.getElementById("learners").value;
 
-  const formattedSummary = 
-    `Programme: ${programmeName}\n` +
-    `Total Headcount: ${totalHeadcount}\n\n` +
-    summaryText.replace("This estimated pricing is intended as a guideline only. Final costs may vary based on budget negotiations and the use of different rollout options within the same project.", "");
-
-  document.getElementById("costSummary").value = formattedSummary.trim();
+  document.getElementById("formProgramme").value = programme;
+  document.getElementById("formHeadcount").value = headcount;
+  document.getElementById("costSummary").value = summary;
   document.getElementById("formModal").style.display = "flex";
 }
 
