@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -37,14 +37,19 @@
       flex-direction: column;
       justify-content: flex-start;
     }
-    h1, .results-box h2 {
+    h1 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 30px;
+      font-size: 33px;
+      text-align: center;
       margin-bottom: 1rem;
     }
     .results-box h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
       text-align: left;
+      margin-bottom: 1rem;
     }
     label {
       font-weight: bold;
@@ -61,6 +66,28 @@
       border-radius: 30px;
       font-family: 'Montserrat', sans-serif;
       background-color: white;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: white url('data:image/svg+xml;utf8,<svg fill="%235b01fa" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 1rem center;
+      background-size: 1rem;
+      padding-right: 2.5rem;
+    }
+    input[type="number"]::placeholder {
+      color: #a6a6a6 !important;
+      font-style: italic;
+      font-family: 'Montserrat', sans-serif;
+    }
+    select:invalid {
+      color: #a6a6a6 !important;
+      font-style: italic;
+      font-family: 'Montserrat', sans-serif;
+    }
+    input[type="number"]:focus, select:focus {
+      outline: none;
+      border: 2px solid #5b01fa;
+      color: #000;
+      font-style: normal;
     }
     .checkboxes label {
       display: flex;
@@ -110,11 +137,6 @@
       display: flex;
       justify-content: space-between;
     }
-    .results-note {
-      font-size: 0.9rem;
-      margin-top: 1rem;
-      font-family: 'Montserrat', sans-serif;
-    }
     .results-buttons {
       margin-top: 0.5rem;
       display: none;
@@ -143,6 +165,11 @@
       display: block;
       margin-top: 1rem;
       margin-bottom: 1rem;
+    }
+    .results-note {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      font-family: 'Montserrat', sans-serif;
     }
     .form-modal {
       display: none;
@@ -211,7 +238,6 @@
       </div>
       <button onclick="calculateTotal()">Calculate</button>
     </div>
-
     <div class="results-box" id="results">
       <h2>Estimated Rollout Cost</h2>
       <div id="resultsContent"></div>
@@ -221,7 +247,6 @@
       </div>
     </div>
   </div>
-
   <div class="form-modal" id="formModal">
     <div class="form-content">
       <h3>Submit Your Interest</h3>
@@ -234,14 +259,12 @@
       </form>
     </div>
   </div>
-
   <script>
     function toggleEngagementOptions() {
       const learners = parseInt(document.getElementById("learners").value) || 0;
       const engagement = document.getElementById("engagement").value;
       const sessionInfo = document.getElementById("sessionInfo");
       const sessionDetails = document.getElementById("sessionDetails");
-
       if (engagement.startsWith("external") && learners > 0) {
         const groups = Math.ceil(learners / 25);
         const sessions = groups * 5;
@@ -252,7 +275,6 @@
         sessionDetails.innerHTML = "";
       }
     }
-
     function getContentCost(learners) {
       let rate = 450;
       if (learners > 5000) rate = 300;
@@ -263,15 +285,12 @@
       const total = learners * rate;
       return Math.min(total, 3500000);
     }
-
     function calculateTotal() {
       const learners = parseInt(document.getElementById("learners").value) || 0;
       const engagement = document.getElementById("engagement").value;
       const kickoff = document.getElementById("kickoff").checked;
       const wrapup = document.getElementById("wrapup").checked;
-
       const contentCost = getContentCost(learners);
-
       let engagementCost = 0;
       if (engagement.startsWith("external")) {
         const groups = Math.ceil(learners / 25);
@@ -279,39 +298,31 @@
         const rate = engagement === "external_virtual" ? 3500 : 4500;
         engagementCost = sessions * rate;
       }
-
       let resultsHTML = '';
       resultsHTML += `<div class='results-line-item'><span>Content Cost:</span><span>R${contentCost.toLocaleString()}</span></div>`;
-
       if (engagementCost > 0) {
         resultsHTML += `<div class='results-line-item'><span>Engagement Session:</span><span>R${engagementCost.toLocaleString()}</span></div>`;
       }
-
       if (kickoff) {
         resultsHTML += `<div class='results-line-item'><span>Kick-off</span><span>R15,000</span></div>`;
       }
       if (wrapup) {
         resultsHTML += `<div class='results-line-item'><span>Wrap-up</span><span>R17,500</span></div>`;
       }
-
       const extrasCost = (kickoff ? 15000 : 0) + (wrapup ? 17500 : 0);
       const totalCost = contentCost + engagementCost + extrasCost;
-
-resultsHTML += `<div class="line"></div>`;
-resultsHTML += `<div class='total-line'><span>Total Estimated Cost</span><span>R${totalCost.toLocaleString()}</span></div>`;
-resultsHTML += `<div class="line"></div>`;
-resultsHTML += `<p class="results-note">We use this estimated pricing as a guideline for clients. This is not indicative of the final price charged, given negotiations on budget, as well as using different rollout options within a single rollout project.</p>`;
-
+      resultsHTML += `<div class="line"></div>`;
+      resultsHTML += `<div class='total-line'><span>Total Estimated Cost</span><span>R${totalCost.toLocaleString()}</span></div>`;
+      resultsHTML += `<div class="line"></div>`;
+      resultsHTML += `<p class="results-note">We use this estimated pricing as a guideline for clients. This is not indicative of the final price charged, given negotiations on budget, as well as using different rollout options within a single rollout project.</p>`;
       document.getElementById("resultsContent").innerHTML = resultsHTML;
       document.getElementById("resultsButtons").style.display = "flex";
     }
-
     function showFormWithSummary() {
       const summary = document.getElementById("resultsContent").innerText;
       document.getElementById("costSummary").value = summary;
       document.getElementById("formModal").style.display = "flex";
     }
-
     document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
   </script>
 </body>
