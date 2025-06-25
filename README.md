@@ -7,7 +7,7 @@
 body {
   background-color: #F1ECEC;
   font-family: 'Montserrat', sans-serif;
-  padding: 2rem 0.25rem; /* reduced horizontal padding */
+  padding: 2rem 0.25rem;
   margin: 0;
   overflow-x: hidden;
 }
@@ -21,8 +21,8 @@ body {
   margin: 0 auto;
   gap: 2rem;
   box-sizing: border-box;
-  padding-left: 0.25rem; /* reduced internal container spacing */
-  padding-right: 0.25rem;
+  padding-left: 0; /* fully remove side padding */
+  padding-right: 0;
 }
 @media (min-width: 1024px) {
   .container {
@@ -36,7 +36,7 @@ body {
   border: 2px solid #F75C36;
   border-radius: 20px;
   padding: 2rem;
-  width: 1000px;
+  width: 1025px;
   box-sizing: border-box;
 }
 .results-box {
@@ -44,7 +44,7 @@ body {
   border-radius: 25px;
   padding: 2rem;
   color: white;
-  width: 600px;
+  width: 550px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
