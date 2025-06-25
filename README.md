@@ -287,9 +287,9 @@
       <label for="engagement">Rollout Options:</label>
       <select id="engagement" onchange="toggleEngagementOptions()" required>
         <option value="" disabled selected hidden>Please select a rollout option.</option>
-        <option value="elearning">Standard eLearning - No Engagement (Free)</option>
-        <option value="team">Team Meeting Discussion (Free)</option>
-        <option value="internal">Dedicated Sessions - Internal Facilitator (Free)</option>
+        <option value="elearning">Standard eLearning - No Engagement (No extra cost)</option>
+        <option value="team">Team Meeting Discussion (No extra cost)</option>
+        <option value="internal">Dedicated Sessions - Internal Facilitator (No extra cost)</option>
         <option value="external_virtual">Dedicated Sessions - RTTM Facilitator: Virtual (60 min) - R3,500/session</option>
         <option value="external_inperson">Dedicated Sessions - RTTM Facilitator: In-person (60 min) - R4,500/session</option>
       </select>
