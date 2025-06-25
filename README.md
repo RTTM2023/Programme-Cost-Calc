@@ -397,10 +397,10 @@
       }
 
       if (kickoff) {
-        resultsHTML += `<div class='results-line-item'><span>Kick-off</span><span>R15,000</span></div>`;
+        resultsHTML += `<div class='results-line-item'><span>Kick-off Cost:</span><span>R15,000</span></div>`;
       }
       if (wrapup) {
-        resultsHTML += `<div class='results-line-item'><span>Wrap-up</span><span>R17,500</span></div>`;
+        resultsHTML += `<div class='results-line-item'><span>Wrap-up Cost:</span><span>R17,500</span></div>`;
       }
 
       const extrasCost = (kickoff ? 15000 : 0) + (wrapup ? 17500 : 0);
