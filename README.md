@@ -71,7 +71,7 @@ label {
   margin-top: 1.5rem;
   display: block;
 }
-input[type="number"], select {
+select {
   margin-top: 0.5rem;
   width: 100%;
   padding: 0.6rem 1rem;
