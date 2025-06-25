@@ -308,7 +308,7 @@
       </select>
 
       <div id="sessionInfo" style="display:none;">
-        <em>We recommend group sizes of 25 people to allow for better engagement. Each group would attend sessions based on the selected programme.</em>
+        <em>We recommend groups of 25 people for optimal engagement. Each group will watch 1 episode per session, followed by a discussion. Therefore, the number of sessions per group will match the number of episodes in the programme.</em>
         <div id="sessionDetails"></div>
       </div>
 
