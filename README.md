@@ -275,18 +275,18 @@
       <!-- Programme selection dropdown -->
       <label for="programme">Select the Training Programme:</label>
       <select id="programme" onchange="toggleProgramme()" required>
-        <option value="" disabled selected hidden>Please select a programme</option>
+        <option value="" disabled selected hidden>Please select a training programme.</option>
         <option value="theline">The Line (Sexual Harassment)</option>
         <option value="chapter1">The Inclusion Challenge, Chapter 1 (DEIB)</option>
         <option value="chapter2">The Inclusion Challenge, Chapter 2 (DEIB)</option>
       </select>
 
       <label for="learners">Number of Employees to be Trained:</label>
-      <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number" />
+      <input type="number" id="learners" oninput="toggleEngagementOptions()" placeholder="Enter total number." />
 
       <label for="engagement">Rollout Options:</label>
       <select id="engagement" onchange="toggleEngagementOptions()" required>
-        <option value="" disabled selected hidden>Please select a rollout option</option>
+        <option value="" disabled selected hidden>Please select a rollout option.</option>
         <option value="elearning">Standard eLearning - No Engagement (Free)</option>
         <option value="team">Team Meeting Discussion (Free)</option>
         <option value="internal">Dedicated Sessions - Internal Facilitator (Free)</option>
