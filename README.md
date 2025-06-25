@@ -8,17 +8,17 @@
 body {
   background-color: #F1ECEC;
   font-family: 'Montserrat', sans-serif;
-  padding: 2rem 2rem 2rem 0.2rem; /* top, right, bottom, left */
+  padding: 2rem 1rem; /* reduced right and left padding */
   margin: 0;
-  overflow-x: hidden; /* prevents horizontal scroll */
+  overflow-x: hidden;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* align both boxes at the top */
   width: 100%;
-  max-width: 1350px; /* bump this up to fit both boxes comfortably */
+  max-width: 1350px;
   margin: 0 auto;
   gap: 2rem;
   box-sizing: border-box;
@@ -26,203 +26,205 @@ body {
 @media (min-width: 1024px) {
   .container {
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: flex-start; /* ensure top alignment */
   }
 }
-    .calculator {
-      background-color: #ffffff;
-      border: 2px solid #F75C36;
-      border-radius: 20px;
-      padding: 2rem;
-      width: 850px;
-      box-sizing: border-box;
-    }
-    .results-box {
-      background-color: #F75D36;
-      border-radius: 25px;
-      padding: 2rem;
-      color: white;
-      width: 500px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      box-sizing: border-box;
-    }
-    h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 33px;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .results-box h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      text-align: left;
-      margin-bottom: 1rem;
-    }
-    label {
-      font-weight: bold;
-      font-size: 1.05rem;
-      margin-top: 1.5rem;
-      display: block;
-    }
-    input[type="number"], select {
-      margin-top: 0.5rem;
-      width: 100%;
-      padding: 0.6rem 1rem;
-      font-size: 1rem;
-      border: 1px dashed #F87171;
-      border-radius: 30px;
-      font-family: 'Montserrat', sans-serif;
-      background-color: white;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      background: white url('data:image/svg+xml;utf8,<svg fill="%235b01fa" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 1rem center;
-      background-size: 1rem;
-      padding-right: 2.5rem;
-    }
-    input[type="number"]::placeholder {
-      color: #a6a6a6 !important;
-      font-style: italic;
-      font-family: 'Montserrat', sans-serif;
-    }
-    select:invalid {
-      color: #a6a6a6 !important;
-      font-style: italic;
-      font-family: 'Montserrat', sans-serif;
-    }
-    input[type="number"]:focus, select:focus {
-      outline: none;
-      border: 2px solid #5b01fa;
-      color: #000;
-      font-style: normal;
-    }
-    .checkboxes label {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-      font-weight: 400;
-      font-size: 1rem;
-    }
-    .checkboxes input[type="checkbox"] {
-      accent-color: #5b01fa;
-      transform: scale(1.2);
-    }
-    button {
-      margin-top: 2rem;
-      width: 100%;
-      padding: 1rem;
-      font-size: 1.2rem;
-      background-color: #F75D36;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      font-family: 'Montserrat', sans-serif;
-      text-align: center;
-    }
-    .results-line-item {
-      font-size: 1.25rem;
-      font-family: 'Montserrat', sans-serif;
-      display: flex;
-      justify-content: space-between;
-      margin: 0.5rem 0;
-    }
-    .results-line-item span {
-      font-weight: normal;
-    }
-    .results-line-item span:last-child {
-      font-weight: bold;
-    }
-    .results-box .line {
-      border-top: 1px dotted white;
-      margin: 1rem 0;
-    }
-    .total-line {
-      font-size: 1.4rem;
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-    }
-    .results-buttons {
-      margin-top: 0.5rem;
-      display: none;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-    .results-buttons button {
-      border-radius: 20px;
-      padding: 0.4rem 0.8rem;
-      font-size: 1rem;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      text-align: left;
-      width: 100%;
-    }
-    .submit-btn {
-      background: white;
-      color: #000;
-      border: 1px dashed #5b01fa;
-    }
-    .reset-btn {
-      background: #5b01fa;
-      color: white;
-    }
-    #sessionInfo em {
-      display: block;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-    }
-    .results-note {
-      font-size: 0.9rem;
-      margin-top: 1rem;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .form-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .form-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 400px;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .form-content h3 {
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-    .form-content input, .form-content textarea {
-      width: 100%;
-      padding: 0.5rem;
-      margin-bottom: 1rem;
-      font-family: 'Montserrat', sans-serif;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-    }
-    .form-content button {
-      background: #F75D36;
-      color: white;
-      border: none;
-      padding: 0.6rem 1rem;
-      border-radius: 10px;
-      font-family: 'Montserrat', sans-serif;
-      cursor: pointer;
-    }
+.calculator {
+  background-color: #ffffff;
+  border: 2px solid #F75C36;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 850px;
+  box-sizing: border-box;
+}
+.results-box {
+  background-color: #F75D36;
+  border-radius: 25px;
+  padding: 2rem;
+  color: white;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 33px;
+  text-align: center;
+  margin-bottom: 1rem;
+  display: none; /* hide The-Line-Cost heading */
+}
+.results-box h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+label {
+  font-weight: bold;
+  font-size: 1.05rem;
+  margin-top: 1.5rem;
+  display: block;
+}
+input[type="number"], select {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px dashed #F87171;
+  border-radius: 30px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: white;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: white url('data:image/svg+xml;utf8,<svg fill="%235b01fa" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 1rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
+input[type="number"]::placeholder {
+  color: #a6a6a6 !important;
+  font-style: italic;
+  font-family: 'Montserrat', sans-serif;
+}
+select:invalid {
+  color: #a6a6a6 !important;
+  font-style: italic;
+  font-family: 'Montserrat', sans-serif;
+}
+input[type="number"]:focus, select:focus {
+  outline: none;
+  border: 2px solid #5b01fa;
+  color: #000;
+  font-style: normal;
+}
+.checkboxes label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  font-weight: 400;
+  font-size: 1rem;
+}
+.checkboxes input[type="checkbox"] {
+  accent-color: #5b01fa;
+  transform: scale(1.2);
+}
+button {
+  margin-top: 2rem;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  background-color: #F75D36;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+.results-line-item {
+  font-size: 1.25rem;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+}
+.results-line-item span {
+  font-weight: normal;
+}
+.results-line-item span:last-child {
+  font-weight: bold;
+}
+.results-box .line {
+  border-top: 1px dotted white;
+  margin: 1rem 0;
+}
+.total-line {
+  font-size: 1.4rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+.results-buttons {
+  margin-top: 0.5rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.results-buttons button {
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  text-align: left;
+  width: 100%;
+}
+.submit-btn {
+  background: white;
+  color: #000;
+  border: 1px dashed #5b01fa;
+}
+.reset-btn {
+  background: #5b01fa;
+  color: white;
+}
+#sessionInfo em {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.results-note {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+.form-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.form-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  font-family: 'Montserrat', sans-serif;
+}
+.form-content h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+.form-content input, .form-content textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.form-content button {
+  background: #F75D36;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
   </style>
 </head>
 <body>
