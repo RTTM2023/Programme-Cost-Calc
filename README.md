@@ -300,6 +300,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
+    <img src="2.png" alt="RTTM Logo" id="pdfLogo" style="display: none; max-width: 200px; margin: 1rem auto;" />
    <div class="container">
     <div class="calculator">
       <h1>Estimated Programme Rollout Cost Calculator</h1>
@@ -470,17 +471,23 @@ function showFormWithSummary() {
   });
   </script>
   <script>
-    function downloadPDF() {
-      const element = document.querySelector('.container'); // includes both calculator and results
-      const opt = {
-        margin:       0.5,
-        filename:     'Rollout_Cost_Estimate.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-      };
-      html2pdf().set(opt).from(element).save();
-    }
+function downloadPDF() {
+  const logo = document.getElementById("pdfLogo");
+  logo.style.display = "block";
+
+  const element = document.querySelector('.container');
+  const opt = {
+    margin:       0.5,
+    filename:     'Run to the Monster - Programme Cost Estimate.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(element).save().then(() => {
+    logo.style.display = "none";
+  });
+}
   </script>
 </body>
 </html>
