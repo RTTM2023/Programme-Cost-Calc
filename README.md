@@ -295,13 +295,30 @@
   text-align: left;
   width: 100%;
   cursor: pointer;
+
+  #pdf-content {
+  background-color: #fef0cc;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+#pdf-logo {
+  display: block;
+  max-width: 180px;
+  margin: 0 auto 2rem auto;
+}
+
 }
   </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-   <div class="container">
-    <div class="calculator">
+  <div id="pdf-content">
+    <img src="2.png" id="pdf-logo" />
+    <div class="container">
+      <div class="calculator">
       <h1>Estimated Programme Rollout Cost Calculator</h1>
 
       <!-- Programme selection dropdown -->
@@ -475,9 +492,22 @@ function showFormWithSummary() {
   </script>
   <script>
 function downloadPDF() {
-  const pdfView = document.getElementById("pdfView");
-  const resultsContent = document.getElementById("resultsContent").innerHTML;
+  const element = document.getElementById('pdf-content');
+  const buttons = document.getElementById('resultsButtons');
+  buttons.style.display = 'none'; // Hide before download
 
+  const opt = {
+    margin:       0,
+    filename:     'Rollout_Cost_Estimate.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(element).save().then(() => {
+    buttons.style.display = 'flex'; // Restore after download
+  });
+}
   // Inject results content
   document.getElementById("pdfContent").innerHTML = resultsContent;
 
