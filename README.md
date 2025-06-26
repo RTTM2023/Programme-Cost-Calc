@@ -296,27 +296,12 @@
   width: 100%;
   cursor: pointer;
 }
-
-#pdf-content {
-  background-color: #fef0cc;
-  padding-top: 4rem;
-  padding-bottom: 2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-#pdf-logo {
-  display: block;
-  max-width: 180px;
-  margin: 0 auto 2rem auto;
-}
-
   </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-    <div class="container">
-      <div class="calculator">
+   <div class="container">
+    <div class="calculator">
       <h1>Estimated Programme Rollout Cost Calculator</h1>
 
       <!-- Programme selection dropdown -->
@@ -380,11 +365,7 @@
   </form>
     </div>
   </div>
-<div id="pdfView" style="display: none; background-color: #fef0cc; padding: 2rem; font-family: 'Montserrat', sans-serif;">
-<img id="pdf-logo" src="2.png" alt="RTTM Logo" />
-  <h2 style="margin-top: 0;">Estimated Rollout Cost</h2>
-  <div id="pdfContent"></div>
-</div>
+
   <script>
     function toggleProgramme() {
       toggleEngagementOptions();
@@ -468,48 +449,38 @@
       document.getElementById("resultsContent").innerHTML = resultsHTML;
       document.getElementById("resultsButtons").style.display = "flex";
     }
-</script>
 
-<script>
-  function showFormWithSummary() {
-    const summary = document.getElementById("resultsContent").innerText;
-    const programme = document.getElementById("programme").options[document.getElementById("programme").selectedIndex].text;
-    const headcount = document.getElementById("learners").value;
+function showFormWithSummary() {
+  const summary = document.getElementById("resultsContent").innerText;
+  const programme = document.getElementById("programme").options[document.getElementById("programme").selectedIndex].text;
+  const headcount = document.getElementById("learners").value;
 
-    document.getElementById("formProgramme").value = programme;
-    document.getElementById("formHeadcount").value = headcount;
-    document.getElementById("costSummary").value = summary;
-    document.getElementById("formModal").style.display = "flex";
-  }
+  document.getElementById("formProgramme").value = programme;
+  document.getElementById("formHeadcount").value = headcount;
+  document.getElementById("costSummary").value = summary;
+  document.getElementById("formModal").style.display = "flex";
+}
 
-  document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
+    document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
   document.getElementById("formModal").addEventListener("click", function (event) {
     const formContent = document.querySelector(".form-content");
     if (!formContent.contains(event.target)) {
       this.style.display = "none";
     }
   });
-</script>
-<script>
-  function downloadPDF() {
-    const pdfView = document.getElementById('pdfView');
-    const resultsHTML = document.getElementById('resultsContent').innerHTML;
-    document.getElementById("pdfContent").innerHTML = resultsHTML;
-
-    pdfView.style.display = "block";
-
-    const opt = {
-      margin:       0.5,
-      filename:     'Rollout_Cost_Estimate.pdf',
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2 },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-
-    html2pdf().set(opt).from(pdfView).save().then(() => {
-      pdfView.style.display = "none";
-    });
-  }
-</script>
+  </script>
+  <script>
+    function downloadPDF() {
+      const element = document.querySelector('.container'); // includes both calculator and results
+      const opt = {
+        margin:       0.5,
+        filename:     'Rollout_Cost_Estimate.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
 </body>
 </html>
