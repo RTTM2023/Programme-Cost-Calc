@@ -282,6 +282,20 @@
 .calculation-line {
   text-align: center;
 }
+
+.download-btn {
+  background: #ffffff;
+  color: #F75D36;
+  border: 1px dashed #F75D36;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
   </style>
 </head>
 <body>
@@ -329,9 +343,10 @@
       <h2>Estimated Rollout Cost</h2>
       <div id="resultsContent"></div>
       <div class="results-buttons" id="resultsButtons">
-        <button class="submit-btn">Submit Interest to RTTM</button>
-        <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
-      </div>
+  <button class="submit-btn">Submit Interest to RTTM</button>
+  <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
+  <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
+</div>
     </div>
   </div>
 
@@ -453,5 +468,18 @@ function showFormWithSummary() {
     }
   });
   </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function downloadPDF() {
+      const element = document.querySelector('.container'); // includes both calculator and results
+      const opt = {
+        margin:       0.5,
+        filename:     'Rollout_Cost_Estimate.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
 </body>
 </html>
