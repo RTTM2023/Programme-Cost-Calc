@@ -295,8 +295,9 @@
   text-align: left;
   width: 100%;
   cursor: pointer;
+}
 
-  #pdf-content {
+#pdf-content {
   background-color: #fef0cc;
   padding-top: 4rem;
   padding-bottom: 2rem;
@@ -310,13 +311,10 @@
   margin: 0 auto 2rem auto;
 }
 
-}
   </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-  <div id="pdf-content">
-    <img src="2.png" id="pdf-logo" />
     <div class="container">
       <div class="calculator">
       <h1>Estimated Programme Rollout Cost Calculator</h1>
@@ -383,7 +381,7 @@
     </div>
   </div>
 <div id="pdfView" style="display: none; background-color: #fef0cc; padding: 2rem; font-family: 'Montserrat', sans-serif;">
-  <img src="2.png" alt="RTTM Logo" style="max-width: 200px; margin-bottom: 2rem;" />
+<img id="pdf-logo" src="2.png" alt="RTTM Logo" />
   <h2 style="margin-top: 0;">Estimated Rollout Cost</h2>
   <div id="pdfContent"></div>
 </div>
@@ -470,62 +468,48 @@
       document.getElementById("resultsContent").innerHTML = resultsHTML;
       document.getElementById("resultsButtons").style.display = "flex";
     }
+</script>
 
-function showFormWithSummary() {
-  const summary = document.getElementById("resultsContent").innerText;
-  const programme = document.getElementById("programme").options[document.getElementById("programme").selectedIndex].text;
-  const headcount = document.getElementById("learners").value;
+<script>
+  function showFormWithSummary() {
+    const summary = document.getElementById("resultsContent").innerText;
+    const programme = document.getElementById("programme").options[document.getElementById("programme").selectedIndex].text;
+    const headcount = document.getElementById("learners").value;
 
-  document.getElementById("formProgramme").value = programme;
-  document.getElementById("formHeadcount").value = headcount;
-  document.getElementById("costSummary").value = summary;
-  document.getElementById("formModal").style.display = "flex";
-}
+    document.getElementById("formProgramme").value = programme;
+    document.getElementById("formHeadcount").value = headcount;
+    document.getElementById("costSummary").value = summary;
+    document.getElementById("formModal").style.display = "flex";
+  }
 
-    document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
+  document.querySelector('.submit-btn').addEventListener('click', showFormWithSummary);
   document.getElementById("formModal").addEventListener("click", function (event) {
     const formContent = document.querySelector(".form-content");
     if (!formContent.contains(event.target)) {
       this.style.display = "none";
     }
   });
-  </script>
-  <script>
-function downloadPDF() {
-  const element = document.getElementById('pdf-content');
-  const buttons = document.getElementById('resultsButtons');
-  buttons.style.display = 'none'; // Hide before download
+</script>
+<script>
+  function downloadPDF() {
+    const pdfView = document.getElementById('pdfView');
+    const resultsHTML = document.getElementById('resultsContent').innerHTML;
+    document.getElementById("pdfContent").innerHTML = resultsHTML;
 
-  const opt = {
-    margin:       0,
-    filename:     'Rollout_Cost_Estimate.pdf',
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2 },
-    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-  };
+    pdfView.style.display = "block";
 
-  html2pdf().set(opt).from(element).save().then(() => {
-    buttons.style.display = 'flex'; // Restore after download
-  });
-}
-  // Inject results content
-  document.getElementById("pdfContent").innerHTML = resultsContent;
+    const opt = {
+      margin:       0.5,
+      filename:     'Rollout_Cost_Estimate.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
 
-  // Show temporarily to render
-  pdfView.style.display = "block";
-
-  const opt = {
-    margin:       0.5,
-    filename:     'Rollout_Cost_Estimate.pdf',
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2 },
-    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-  };
-
-  html2pdf().set(opt).from(pdfView).save().then(() => {
-    pdfView.style.display = "none";
-  });
-    }
-  </script>
+    html2pdf().set(opt).from(pdfView).save().then(() => {
+      pdfView.style.display = "none";
+    });
+  }
+</script>
 </body>
 </html>
