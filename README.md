@@ -286,7 +286,7 @@
 .download-btn {
   background: #ffffff;
   color: #F75D36;
-  border: 1px dashed #F75D36;
+  border: 1px dashed #5b01fa;
   border-radius: 20px;
   padding: 0.4rem 0.8rem;
   font-size: 0.8rem;
