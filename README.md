@@ -365,7 +365,11 @@
   </form>
     </div>
   </div>
-
+<div id="pdfView" style="display: none; background-color: #fef0cc; padding: 2rem; font-family: 'Montserrat', sans-serif;">
+  <img src="2.png" alt="RTTM Logo" style="max-width: 200px; margin-bottom: 2rem;" />
+  <h2 style="margin-top: 0;">Estimated Rollout Cost</h2>
+  <div id="pdfContent"></div>
+</div>
   <script>
     function toggleProgramme() {
       toggleEngagementOptions();
@@ -470,16 +474,27 @@ function showFormWithSummary() {
   });
   </script>
   <script>
-    function downloadPDF() {
-      const element = document.querySelector('.container'); // includes both calculator and results
-      const opt = {
-        margin:       0.5,
-        filename:     'Rollout_Cost_Estimate.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-      };
-      html2pdf().set(opt).from(element).save();
+function downloadPDF() {
+  const pdfView = document.getElementById("pdfView");
+  const resultsContent = document.getElementById("resultsContent").innerHTML;
+
+  // Inject results content
+  document.getElementById("pdfContent").innerHTML = resultsContent;
+
+  // Show temporarily to render
+  pdfView.style.display = "block";
+
+  const opt = {
+    margin:       0.5,
+    filename:     'Rollout_Cost_Estimate.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(pdfView).save().then(() => {
+    pdfView.style.display = "none";
+  });
     }
   </script>
 </body>
