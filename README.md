@@ -297,6 +297,7 @@
   cursor: pointer;
 }
   </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
    <div class="container">
@@ -344,8 +345,8 @@
       <div id="resultsContent"></div>
       <div class="results-buttons" id="resultsButtons">
   <button class="submit-btn">Submit Interest to RTTM</button>
-  <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
   <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
+  <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
 </div>
     </div>
   </div>
@@ -468,7 +469,6 @@ function showFormWithSummary() {
     }
   });
   </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
     function downloadPDF() {
       const element = document.querySelector('.container'); // includes both calculator and results
