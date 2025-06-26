@@ -481,5 +481,6 @@ function showFormWithSummary() {
       };
       html2pdf().set(opt).from(element).save();
     }
+  </script>
 </body>
 </html>
