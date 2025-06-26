@@ -300,7 +300,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-<img src="2.png" alt="RTTM Logo" id="pdfLogo" crossorigin="anonymous" style="display: none; max-width: 200px; margin: 1rem auto;" />
    <div class="container">
     <div class="calculator">
       <h1>Estimated Programme Rollout Cost Calculator</h1>
@@ -472,9 +471,6 @@ function showFormWithSummary() {
   </script>
   <script>
 function downloadPDF() {
-  const logo = document.getElementById("pdfLogo");
-  logo.style.display = "block";
-
   const element = document.querySelector('.container');
   const opt = {
     margin:       0.5,
@@ -493,7 +489,6 @@ function downloadPDF() {
   };
     setTimeout(() => {
     html2pdf().set(opt).from(element).save().then(() => {
-      logo.style.display = "none";
     });
   }, 300);
 }
