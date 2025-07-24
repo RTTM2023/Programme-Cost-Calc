@@ -384,7 +384,7 @@
         const groups = Math.ceil(learners / 25);
         const sessions = groups * episodes;
         sessionInfo.style.display = "block";
-        sessionDetails.innerHTML = `<p class="calculation-line"><strong>Calculation:</strong> ${learners} learners ÷ 25 pax = ${groups} group(s) × 5 sessions/episodes<br><strong>= ${sessions} sessions</strong></p>`;
+sessionDetails.innerHTML = `<p class="calculation-line"><strong>Calculation:</strong> ${learners} learners ÷ 25 pax = ${groups} group(s) × ${episodes} sessions/episodes<br><strong>= ${sessions} sessions</strong></p>`;
       } else {
         sessionInfo.style.display = "none";
         sessionDetails.innerHTML = "";
